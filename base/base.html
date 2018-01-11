@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, width=device-width">
+  <title></title>
+  <link rel="stylesheet" type="text/css" href=""/>
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?8203b93a73fd9e8ffc85bdaa08f566ba";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+</head>
+<body>
+<div id="content">
+  <div class="">点击下载触宝电话</div>
+</div>
+<script src="http://dialer.cdn.cootekservice.com/web/internal/activities/js/vue.min.js"></script>
+<script src="http://dialer.cdn.cootekservice.com/web/internal/activities/js/myLib.js?v=1"></script>
+<script src="http://dialer.cdn.cootekservice.com/web/internal/activities/js/dialer_native.js"></script>
+<script src="http://cdn.jsdelivr.net/npm/eruda"></script>
+<script>eruda.init();</script>
+<script>
+  myLib.remAdjust(20, 360);
+  var vue = new Vue({
+    el: '#content',
+    data: {
+      //data
+      token: '',
+      content: ''
+    },
+    created: function created() {
+    },
+    mounted: function mounted() {
+      var self = this;
+      myLib.ajax({
+        type: 'get',
+        dataType: 'json',
+        url: 'http://touchlife.cootekservice.com/yellowpage_v3/voice_chat_room/get_room_info?_token=' + myLib.GetQueryString('_token') + '&timestamp=' + Date.parse(new Date()) / 1000 + '&group_id=' + myLib.GetQueryString('group_id'),
+        success: function success(res) {
+          self.content = res.result.content.replace(/\n/g, '<br>');
+          console.log(self.content);
+          document.getElementById('content').style.display = 'block';
+        },
+        error: function error() {
+          console.log('加此log用于测试');
+        }
+      });
+    },
+    methods: {
+
+    }
+  });
+</script>
+</body>
+</html>

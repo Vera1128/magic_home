@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, width=device-width">
+  <title>css3画小箭头</title>
+  <style>
+    #content {
+      width: 100px;
+      height: 100px;
+      position: relative;
+    }
+    .decoration {
+      position: absolute;
+    }
+    .decoration-row {
+      width: 11px;
+      height: 2px;
+      background: #915f2e;
+    }
+    .decoration-column {
+      width: 2px;
+      height: 9px;
+      background: #915f2e;
+    }
+  </style>
+</head>
+<body>
+<div id="content">
+  <div class="decoration">
+    <div class="decoration-row"></div>
+    <div class="decoration-column"></div>
+  </div>
+  <div class="decoration" style="top: 0; right: 0; transform: rotateZ(90deg)">
+    <div class="decoration-row"></div>
+    <div class="decoration-column"></div>
+  </div>
+  <div class="decoration" style="left: 0; bottom: 0; transform: rotateZ(-90deg)">
+    <div class="decoration-row"></div>
+    <div class="decoration-column"></div>
+  </div>
+  <div class="decoration" style="right: 0; bottom: 0; transform: rotateZ(180deg)">
+    <div class="decoration-row"></div>
+    <div class="decoration-column"></div>
+  </div>
+</div>
+<script src="http://dialer.cdn.cootekservice.com/web/internal/activities/js/vue.min.js"></script>
+<script src="http://dialer.cdn.cootekservice.com/web/internal/activities/js/myLib.js?v=1"></script>
+<script src="http://dialer.cdn.cootekservice.com/web/internal/activities/js/dialer_native.js"></script>
+</body>
+</html>

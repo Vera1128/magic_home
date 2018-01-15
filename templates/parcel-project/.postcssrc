@@ -1,0 +1,17 @@
+{
+  "plugins": {
+    "autoprefixer": {
+      "browsers": [
+        "last 2 versions",
+        "safari 5",
+        "ie 8",
+        "ie 9",
+        "ie 6-7",
+        "opera <= 12",
+        "ios <= 8",
+        "android <= 4",
+        "Firefox <= 20"
+      ]
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "name": "parcel-project",
+  "version": "1.0.0",
+  "description": "parcel project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "parcel index.html"
+  },
+  "author": "yangyang.xu",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "parcel-bundler": "^1.4.1",
+    "postcss-modules": "^1.1.0"
+  }
+}

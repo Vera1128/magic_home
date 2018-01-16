@@ -69,7 +69,7 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({6:[function(require,module,exports) {
+})({8:[function(require,module,exports) {
 var bundleURL = null;
 function getBundleURLCached() {
   if (!bundleURL) {
@@ -100,7 +100,7 @@ function getBaseURL(url) {
 exports.getBundleURL = getBundleURLCached;
 exports.getBaseURL = getBaseURL;
 
-},{}],5:[function(require,module,exports) {
+},{}],7:[function(require,module,exports) {
 var bundle = require('./bundle-url');
 
 function updateLink(link) {
@@ -132,13 +132,13 @@ function reloadCSS() {
 
 module.exports = reloadCSS;
 
-},{"./bundle-url":6}],4:[function(require,module,exports) {
+},{"./bundle-url":8}],6:[function(require,module,exports) {
 
         var reloadCSS = require('_css_loader');
         module.hot.dispose(reloadCSS);
         module.hot.accept(reloadCSS);
       
-},{"_css_loader":5}],3:[function(require,module,exports) {
+},{"_css_loader":7}],5:[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -150,7 +150,7 @@ require("../css/main.css");
 exports.default = function () {
   // console.log(classes);
 };
-},{"../css/main.css":4}],2:[function(require,module,exports) {
+},{"../css/main.css":6}],4:[function(require,module,exports) {
 "use strict";
 
 var _main = require("./main");
@@ -162,7 +162,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 (0, _main2.default)(); /**
                         * Created by yangyang.xu on 2018/1/15.
                         */
-},{"./main":3}],0:[function(require,module,exports) {
+},{"./main":5}],0:[function(require,module,exports) {
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
 function Module() {
@@ -180,7 +180,7 @@ function Module() {
 module.bundle.Module = Module;
 
 if (!module.bundle.parent && typeof WebSocket !== 'undefined') {
-  var ws = new WebSocket('ws://' + window.location.hostname + ':56627/');
+  var ws = new WebSocket('ws://' + window.location.hostname + ':61383/');
   ws.onmessage = function(event) {
     var data = JSON.parse(event.data);
 
@@ -281,4 +281,4 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id)
   });
 }
-},{}]},{},[0,2])
+},{}]},{},[0,4])

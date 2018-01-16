@@ -12,3 +12,6 @@ div{
     display: -ms-flexbox;
     display: flex;
 }
+.a{
+    color: blue;
+}

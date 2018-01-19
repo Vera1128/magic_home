@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, width=device-width">
+  <title>大转盘</title>
+  <link rel="stylesheet" type="text/css" href="css/index.css"/>
+</head>
+<body>
+<div id="content">
+  <div id="bg">
+     <img class="pointer" src="img/pointer.png" alt="pointer" @click="startGetReward">
+     <img :class="{'turntable': true, 'turntable-transform': addTransition}" src="img/turntable.png" alt="turntable">
+  </div>
+</div>
+<script src="http://dialer.cdn.cootekservice.com/web/internal/activities/js/vue.min.js"></script>
+<script src="http://dialer.cdn.cootekservice.com/web/internal/activities/js/myLib.js?v=1"></script>
+<script src="http://dialer.cdn.cootekservice.com/web/internal/activities/js/dialer_native.js"></script>
+<script src="http://cdn.jsdelivr.net/npm/eruda"></script>
+<script>eruda.init();</script>
+<script src="js/index.js"></script>
+</body>
+</html>

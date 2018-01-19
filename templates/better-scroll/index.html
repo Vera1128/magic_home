@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, width=device-width">
+  <title>better-scroll实现上下拉刷新</title>
+  <link rel="stylesheet" type="text/css" href="css/index.css"/>
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?8203b93a73fd9e8ffc85bdaa08f566ba";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+</head>
+<body>
+<div id="content">
+  <!-- content -->
+  <div class="list-wrapper list-wrapper-hook">
+    <div>
+      <!-- 顶部提示信息 -->
+      <div class="top-tip">
+        <span class="refresh-hook">下拉刷新</span>
+      </div>
+      <!-- 列表 -->
+      <ul class="list-content list-content-hook">
+        <li v-for="(item, index) in data_list">{{item.title}}</li>
+      </ul>
+      <!--
+        1、底部提示信息
+        2、这里有一种情况,就是没有更多数据时,这里的文本应该显示"暂无更多数据"
+      -->
+      <div class="bottom-tip">
+        <span class="loading-hook">查看更多</span>
+      </div>
+    </div>
+  </div>
+  <!-- content end  -->
+
+  <!-- alert -->
+  <div class="alert alert-hook">刷新成功</div>
+
+</div>
+<script src="http://dialer.cdn.cootekservice.com/web/internal/activities/js/vue.min.js"></script>
+<script src="http://dialer.cdn.cootekservice.com/web/internal/activities/js/myLib.js?v=1"></script>
+<script src="http://dialer.cdn.cootekservice.com/web/internal/activities/js/dialer_native.js"></script>
+<script src="http://cdn.jsdelivr.net/npm/eruda"></script>
+<script>eruda.init();</script>
+<script src="js/bscroll.js"></script>
+<script src="js/index.js"></script>
+</body>
+</html>

@@ -89,7 +89,7 @@ var vue = new Vue({
         htmlDOM:  '<div class="avatar">' +
                   '<img class="head-img" src="img/head-img1.jpeg"/>' +
                   '</div>' +
-                  '<img src="img/6.gif"/> '
+                  '<img width="50" height="50" src="img/6.gif"/> '
       }
     ],
     list: [
@@ -151,10 +151,10 @@ var vue = new Vue({
       }
       else if (this.gameIndex == 2) {
         var htmlDOM = `<div class="text-container">${this.answerOne[this.selectNowIndex1]}` +
-                 '</div>' +
-                 '<div class="avatar">' +
-                 '<img class="head-img" src="img/head-img2.jpeg"/>' +
-                 '</div>';
+                      '</div>' +
+                      '<div class="avatar">' +
+                      '<img class="head-img" src="img/head-img2.jpeg"/>' +
+                      '</div>';
         this.list.push({
           isSelf: true,
           htmlDOM: htmlDOM

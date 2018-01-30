@@ -47,7 +47,7 @@ var vue = new Vue({
       htmlDOM: '<div class="avatar">' + '<img class="head-img" src="img/head-img1.jpeg"/>' + '</div>' + '<div class="text-container">我先扔咯' + '</div>'
     }, {
       isSelf: false,
-      htmlDOM: '<div class="avatar">' + '<img class="head-img" src="img/head-img1.jpeg"/>' + '</div>' + '<img src="img/6.gif"/> '
+      htmlDOM: '<div class="avatar">' + '<img class="head-img" src="img/head-img1.jpeg"/>' + '</div>' + '<img width="50" height="50" src="img/6.gif"/> '
     }],
     list: [{
       isSelf: false,

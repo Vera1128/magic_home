@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, width=device-width">
+  <title>真心话大冒险</title>
+  <link rel="stylesheet" type="text/css" href="css/index.css"/>
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?8203b93a73fd9e8ffc85bdaa08f566ba";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+</head>
+<body>
+<div id="content">
+  <div class="chat-list" :style="{height: state.showAnswerOne ? 'calc(100% - 15rem)':'calc(100% - 5rem)'}">
+    <template v-for="(item, index) in list">
+      <transition name="fade">
+        <div class="other-container" v-if="!item.isSelf" v-html="item.htmlDOM">
+        </div>
+      </transition>
+      <transition name="fade">
+        <div class="self-container" v-if="item.isSelf" v-html="item.htmlDOM">
+        </div>
+      </transition>
+    </template>
+  </div>
+
+  <div class="answer-container" v-show="state.showAnswerOne">
+    <div class="title">你的回答是：</div>
+    <div class="answer" :class="{'answer-select': state.answerOne[0]}" @click="answerSelect(1, 0)">可以暧昧的聊天</div>
+    <div class="answer" :class="{'answer-select': state.answerOne[1]}" @click="answerSelect(1, 1)">可以的啦~</div>
+    <div class="answer" :class="{'answer-select': state.answerOne[2]}" @click="answerSelect(1, 2)">我不能接受</div>
+  </div>
+  <div class="fix-btn" :style="{background: state.isLockedBtn ? '#a9a9a9' : state.isPressedBtn ? '#0398db' : '#03a9f4'}" @click="clickBtn" @touchstart="touchStart" @touchend="touchEnd">{{btnText}}</div>
+</div>
+<script src="http://dialer.cdn.cootekservice.com/web/internal/activities/js/vue.min.js"></script>
+<script src="http://dialer.cdn.cootekservice.com/web/internal/activities/js/myLib.js?v=1"></script>
+<script src="js/socket.io.js"></script>
+<script src="js/index.js"></script>
+</body>
+</html>

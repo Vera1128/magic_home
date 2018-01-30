@@ -1,0 +1,205 @@
+@font-face {
+  font-family: PingFangSC-Regular;
+  src: url("http://cootek-dialer-download.oss-cn-hangzhou.aliyuncs.com/web/fonts/PingFangSC-Regular.ttf");
+}
+
+@font-face {
+  font-family: dialer_icon1;
+  src: url("http://cootek-dialer-download.oss-cn-hangzhou.aliyuncs.com/web/fonts/dialer_icon1.ttf");
+}
+
+@font-face {
+  font-family: dialer_icon2;
+  src: url("http://cootek-dialer-download.oss-cn-hangzhou.aliyuncs.com/web/fonts/dialer_icon2.ttf");
+}
+
+@font-face {
+  font-family: dialer_icon3;
+  src: url("http://cootek-dialer-download.oss-cn-hangzhou.aliyuncs.com/web/fonts/dialer_icon3.ttf");
+}
+
+@font-face {
+  font-family: dialer_icon4;
+  src: url("http://cootek-dialer-download.oss-cn-hangzhou.aliyuncs.com/web/fonts/dialer_icon4.ttf");
+}
+html{
+  -webkit-user-select: none;
+  font-family: 'Helvetica Neue',Helvetica,Arial,PingFangSC-Regular,sans-serif;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+  font-weight: 300;
+  height: 100%;
+}
+*{
+  margin: 0;
+  padding: 0;
+}
+div{
+  box-sizing: border-box;
+  position: relative;
+}
+img{
+  display: block;
+}
+html, body{
+  width: 100%;
+  height: 100%;
+}
+#content {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  .chat-list-large {
+    height: calc(100% - 15rem);
+  }
+  .chat-list {
+    width: 100%;
+    height: calc(100% - 5rem);
+    padding: 0.65rem 0.6rem;
+    overflow-y: scroll;
+    .other-container {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: flex-start;
+      margin-top: 0.7rem;
+      opacity: 1;
+      .avatar {
+        width: 2rem;
+        height: 2rem;
+        border-radius: 50%;
+        overflow: hidden;
+        border: 1px solid #cccccc;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        .head-img {
+          width: 100%;
+        }
+      }
+      .text-container {
+        max-width: 12.52rem;
+        border-radius: 0.33rem;
+        margin-left: 0.5rem;
+        padding: 0.4rem 0.5rem;
+        background: #ff5c93;
+        font-family: PingFangSC-Regular;
+        font-size: 0.8rem;
+        color: white;
+      }
+      .text-container:before {
+        content: "";
+        display: block;
+        position: absolute;
+        left: -5px;
+        top: 12px;
+        width: 10px;
+        height: 10px;
+        border-radius: 2px;
+        background: #ff5c93;
+        transform: rotateZ(45deg);
+      }
+    }
+    .self-container {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      align-items: flex-start;
+      margin-top: 0.7rem;
+      opacity: 1;
+      .avatar {
+        width: 2rem;
+        height: 2rem;
+        border-radius: 50%;
+        overflow: hidden;
+        border: 1px solid #cccccc;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        .head-img {
+          width: 100%;
+        }
+      }
+      .text-container {
+        max-width: 12.52rem;
+        border-radius: 0.33rem;
+        margin-right: 0.5rem;
+        padding: 0.4rem 0.5rem;
+        background: #9addfb;
+        font-family: PingFangSC-Regular;
+        font-size: 0.8rem;
+        color: black;
+      }
+      .text-container:before {
+        content: "";
+        display: block;
+        position: absolute;
+        right: -5px;
+        top: 12px;
+        width: 10px;
+        height: 10px;
+        border-radius: 2px;
+        background: #9addfb;
+        transform: rotateZ(45deg);
+      }
+    }
+  }
+  .answer-container {
+    width: 100%;
+    position: fixed;
+    bottom: 4rem;
+    .title {
+      width: 15rem;
+      text-align: left;
+      font-family: PingFangSC-Regular;
+      font-size: 0.75rem;
+      color: #323232;
+      margin: auto;
+    }
+    .answer {
+      width: 15rem;
+      height: 2.5rem;
+      line-height: 2.5rem;
+      text-align: center;
+      border-radius: 1.667rem;
+      border: 1px solid #979797;
+      margin: 0.5rem auto 0;
+      font-family: PingFangSC-Regular;
+      font-size: 0.75rem;
+      color: #323232;
+    }
+    .answer-select {
+      border: 1px solid #ff5c93;
+      color: #ff5c93;
+    }
+  }
+  .fix-btn {
+    position: fixed;
+    bottom: 1rem;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 15rem;
+    height: 2.5rem;
+    line-height: 2.5rem;
+    text-align: center;
+    background: #03a9f4;
+    border-radius: 1.667rem;
+    font-family: PingFangSC-Regular;
+    font-size: 0.9rem;
+    color: white;
+  }
+}
+
+.fade-enter-active{
+  transition: all .5s ease;
+}
+.fade-leave-active {
+  transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.fade-enter, .fade-leave-active {
+  opacity: 0
+}

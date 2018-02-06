@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #out{
+            background: url(1.jpg) 0 0/100% 100% no-repeat;
+            width: 100%;
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+        #in{
+            position: absolute;
+            z-index: 1;
+            width: 90%;
+            height: 50vh;
+            left: 5%;
+            top: 40%;
+            overflow: hidden;
+            box-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
+        }
+        #in::after{
+            content: '';
+            background: url(1.jpg) 0 0/100% 100% no-repeat;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+            background-attachment: fixed;
+            -webkit-filter: blur(10px);
+        }
+    </style>
+</head>
+<body>
+    <div id="out">
+        <div id="in">
+        wooooshidcsaicdscdcdssd<br>
+        hdisahciasddh<br>
+        husiacbuida
+        </div>
+    </div>
+</body>
+</html>

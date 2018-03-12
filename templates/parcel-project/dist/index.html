@@ -3,15 +3,111 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, width=device-width">
-  <title>parcel打包项目</title>
+  <title>翻扑克赢金币</title>
 <link rel="stylesheet" href="/dist/96d1a7e0deb03752a9ddb901a404aab1.css"></head>
 <body>
 <div id="content">
-  <div class="a">Parcel</div>
-  <p></p>
+  <!--匹配页面-->
+  <div class="loading-container" v-show="state.showLoadingPage">
+    <div class="close-icon">G</div>
+    <div class="match-container">
+      <transition name="match-success">
+        <div class="head-container" v-show="matchSuccess">
+          <img src="/dist/1245cf90acff148e58f5b4ced031519a.jpeg">
+        </div>
+      </transition>
+      <div class="head-container">
+        <img src="/dist/744aae97da6550d41f47e7140dbd4cdc.png">
+      </div>
+      <transition name="vs-scale">
+        <img src="/dist/65490bf5bc780e3d2b845c722a3e005b.png" class="vs-style" v-show="matchSuccess">
+      </transition>
+    </div>
+    <div class="loading-content">{{matchSuccess ? '匹配成功' : '匹配中…'}}</div>
+    <div class="loading-progress-panel">
+      <div class="loading-progress" :style="{'width': progressWidth}"></div>
+    </div>
+    <div class="tips">所有的扑克中A是最小的</div>
+  </div>
+  <!--玩游戏界面-->
+  <div class="play-page" v-show="!state.showLoadingPage">
+    <div class="top-container">
+      <img class="bg" src="/dist/0d8b44b29cfd2d3412ff6aad181c36bc.jpg">
+      <img class="bg bg-down" src="/dist/c326351628554d44e4f6613968a842b7.png">
+      <img class="hoster" src="/dist/63ff67930510cda9cc8d6541cb511b0c.png">
+    </div>
+    <div class="bottom-container">
+      <div class="play">
+        <!--对手-->
+        <div class="person-info-container">
+          <div :class="{'head-container':true, 'head-container-select': opponent.selected}">
+            <img src="/dist/cb41c4ba1cc23be911017b75a7267da1.jpeg">
+          </div>
+          <div class="nickname">
+            {{opponent.nickname}}
+          </div>
+          <div class="coins-container">
+            <img src="/dist/7fb3e2ce022186713d7a69b5facbbfef.png">
+            <div class="coins-num">{{opponent.coinNum}}</div>
+          </div>
+          <div class="add-coins">
+            +20
+          </div>
+        </div>
+        <div class="play-info">
+          <div class="all-poker">
+            <img src="/dist/7c16cc57da4c0e3054bb96f8539fca2d.png">
+            <img src="/dist/7c16cc57da4c0e3054bb96f8539fca2d.png" style="margin-left: -20px;">
+            <img src="/dist/7c16cc57da4c0e3054bb96f8539fca2d.png" style="margin-left: -20px;">
+            <img src="/dist/7c16cc57da4c0e3054bb96f8539fca2d.png" style="margin-left: -20px;">
+            <img src="/dist/7c16cc57da4c0e3054bb96f8539fca2d.png" style="margin-left: -20px;">
+            <img src="/dist/7c16cc57da4c0e3054bb96f8539fca2d.png" style="margin-left: -20px;">
+            <img src="/dist/7c16cc57da4c0e3054bb96f8539fca2d.png" style="margin-left: -20px;">
+            <img src="/dist/7c16cc57da4c0e3054bb96f8539fca2d.png" style="margin-left: -20px;">
+            <img src="/dist/7c16cc57da4c0e3054bb96f8539fca2d.png" style="margin-left: -20px;">
+            <img src="/dist/7c16cc57da4c0e3054bb96f8539fca2d.png" style="margin-left: -20px;">
+          </div>
+          <div class="play-info-tip">本局累计金币</div>
+          <div class="play-info-coins">
+            <img src="/dist/19aaf6614d90da58466802f5bd745d02.png">
+            <div class="num">120</div>
+          </div>
+          <div class="play-info-poker">
+            <img src="/dist/d5486b004ae630e9033da95c7335dedc.png" class="rotateLeft">
+            <img src="/dist/7c16cc57da4c0e3054bb96f8539fca2d.png" class="rotateRight">
+          </div>
+          <div class="play-info-select-tip">轮到你选择</div>
+        </div>
+        <!--自己-->
+        <div class="person-info-container">
+          <div :class="{'head-container':true, 'head-container-select': self.selected}">
+            <img src="/dist/d3bc607a1d3b9db7f8f0028192671793.jpeg">
+          </div>
+          <div class="nickname">
+            {{self.nickname}}
+          </div>
+          <div class="coins-container">
+            <img src="/dist/7fb3e2ce022186713d7a69b5facbbfef.png">
+            <div class="coins-num">{{self.coinNum}}</div>
+          </div>
+          <div class="add-coins">
+            +20
+          </div>
+        </div>
+      </div>
+      <div class="btn-group">
+        <div class="select-btn">大</div>
+        <div :class="{'select-btn':true, 'select-btn-pressed':true}" style="margin-right: 0">小</div>
+      </div>
+    </div>
+  </div>
 </div>
 <script src="http://dialer.cdn.cootekservice.com/web/internal/activities/js/vue.min.js"></script>
 <script src="http://dialer.cdn.cootekservice.com/web/internal/activities/js/myLib.js?v=1"></script>
+<script>
+  var clientWidth = document.documentElement.clientWidth || document.body.clientWidth;
+  document.documentElement.style.fontSize = clientWidth > 414 ? '20px' : 20 * clientWidth / 360 + 'px';
+</script>
 <script src="/dist/96d1a7e0deb03752a9ddb901a404aab1.js"></script>
 </body>
 </html>

@@ -69,7 +69,17 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({8:[function(require,module,exports) {
+})({11:[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+exports.default = function () {
+  // console.log(classes);
+};
+},{}],14:[function(require,module,exports) {
 var bundleURL = null;
 function getBundleURLCached() {
   if (!bundleURL) {
@@ -100,7 +110,7 @@ function getBaseURL(url) {
 exports.getBundleURL = getBundleURLCached;
 exports.getBaseURL = getBaseURL;
 
-},{}],7:[function(require,module,exports) {
+},{}],12:[function(require,module,exports) {
 var bundle = require('./bundle-url');
 
 function updateLink(link) {
@@ -132,37 +142,66 @@ function reloadCSS() {
 
 module.exports = reloadCSS;
 
-},{"./bundle-url":8}],6:[function(require,module,exports) {
+},{"./bundle-url":14}],10:[function(require,module,exports) {
 
         var reloadCSS = require('_css_loader');
         module.hot.dispose(reloadCSS);
         module.hot.accept(reloadCSS);
       
-},{"_css_loader":7}],5:[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-require("../css/main.css");
-
-exports.default = function () {
-  // console.log(classes);
-};
-},{"../css/main.css":6}],4:[function(require,module,exports) {
+},{"_css_loader":12}],9:[function(require,module,exports) {
 "use strict";
 
 var _main = require("./main");
 
 var _main2 = _interopRequireDefault(_main);
 
+require("../css/index.scss");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-(0, _main2.default)(); /**
-                        * Created by yangyang.xu on 2018/1/15.
-                        */
-},{"./main":5}],0:[function(require,module,exports) {
+/**
+ * Created by yangyang.xu on 2018/1/15.
+ */
+(0, _main2.default)();
+myLib.remAdjust(20, 360);
+var vue = new Vue({
+  el: '#content',
+  data: {
+    //data
+    state: {
+      showLoadingPage: false
+    },
+    matchSuccess: false, //匹配成功
+    progressWidth: 0,
+    //对手的信息
+    opponent: {
+      'headImg': './images/danni.jpeg',
+      'nickname': '丹妮',
+      'coinNum': 2000,
+      'selected': false
+    },
+    //我的信息
+    self: {
+      'headImg': 'images/yangyang.jpeg',
+      'nickname': '小娜',
+      'coinNum': 1000,
+      'selected': true
+    }
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    document.getElementById('content').style.display = 'block';
+    setTimeout(function () {
+      _this.progressWidth = '100%';
+      setTimeout(function () {
+        _this.matchSuccess = true;
+      }, 500);
+    }, 500);
+  },
+  methods: {}
+});
+},{"./main":11,"../css/index.scss":10}],0:[function(require,module,exports) {
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
 function Module() {
@@ -180,7 +219,7 @@ function Module() {
 module.bundle.Module = Module;
 
 if (!module.bundle.parent && typeof WebSocket !== 'undefined') {
-  var ws = new WebSocket('ws://' + window.location.hostname + ':61383/');
+  var ws = new WebSocket('ws://' + window.location.hostname + ':50947/');
   ws.onmessage = function(event) {
     var data = JSON.parse(event.data);
 
@@ -281,4 +320,4 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id)
   });
 }
-},{}]},{},[0,4])
+},{}]},{},[0,9])

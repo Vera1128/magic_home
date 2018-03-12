@@ -3,15 +3,111 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
   <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, width=device-width">
-  <title>parcel打包项目</title>
+  <title>翻扑克赢金币</title>
 </head>
 <body>
 <div id="content">
-  <div class="a">Parcel</div>
-  <p></p>
+  <!--匹配页面-->
+  <div class="loading-container" v-show="state.showLoadingPage">
+    <div class="close-icon">G</div>
+    <div class="match-container">
+      <transition name="match-success">
+        <div class="head-container" v-show="matchSuccess">
+          <img src="images/yangyang.jpeg">
+        </div>
+      </transition>
+      <div class="head-container">
+        <img src="images/jasper.png">
+      </div>
+      <transition name="vs-scale">
+        <img src="images/vs.png" class="vs-style" v-show="matchSuccess">
+      </transition>
+    </div>
+    <div class="loading-content">{{matchSuccess ? '匹配成功' : '匹配中…'}}</div>
+    <div class="loading-progress-panel">
+      <div class="loading-progress" :style="{'width': progressWidth}"></div>
+    </div>
+    <div class="tips">所有的扑克中A是最小的</div>
+  </div>
+  <!--玩游戏界面-->
+  <div class="play-page" v-show="!state.showLoadingPage">
+    <div class="top-container">
+      <img class="bg" src="images/bg-up.jpg" />
+      <img class="bg bg-down" src="images/bg-down.png" />
+      <img class="hoster" src="images/hoster.png" />
+    </div>
+    <div class="bottom-container">
+      <div class="play">
+        <!--对手-->
+        <div class="person-info-container">
+          <div :class="{'head-container':true, 'head-container-select': opponent.selected}">
+            <img src="./images/danni.jpeg"/>
+          </div>
+          <div class="nickname">
+            {{opponent.nickname}}
+          </div>
+          <div class="coins-container">
+            <img src="images/coin.png">
+            <div class="coins-num">{{opponent.coinNum}}</div>
+          </div>
+          <div class="add-coins">
+            +20
+          </div>
+        </div>
+        <div class="play-info">
+          <div class="all-poker">
+            <img src="images/poker.png" />
+            <img src="images/poker.png" style="margin-left: -20px;"/>
+            <img src="images/poker.png" style="margin-left: -20px;"/>
+            <img src="images/poker.png" style="margin-left: -20px;"/>
+            <img src="images/poker.png" style="margin-left: -20px;"/>
+            <img src="images/poker.png" style="margin-left: -20px;"/>
+            <img src="images/poker.png" style="margin-left: -20px;"/>
+            <img src="images/poker.png" style="margin-left: -20px;"/>
+            <img src="images/poker.png" style="margin-left: -20px;"/>
+            <img src="images/poker.png" style="margin-left: -20px;"/>
+          </div>
+          <div class="play-info-tip">本局累计金币</div>
+          <div class="play-info-coins">
+            <img src="images/coins.png" />
+            <div class="num">120</div>
+          </div>
+          <div class="play-info-poker">
+            <img src="images/1.png" class="rotateLeft">
+            <img src="images/poker.png" class="rotateRight">
+          </div>
+          <div class="play-info-select-tip">轮到你选择</div>
+        </div>
+        <!--自己-->
+        <div class="person-info-container">
+          <div :class="{'head-container':true, 'head-container-select': self.selected}">
+            <img src="./images/xiaona.jpeg"/>
+          </div>
+          <div class="nickname">
+            {{self.nickname}}
+          </div>
+          <div class="coins-container">
+            <img src="images/coin.png">
+            <div class="coins-num">{{self.coinNum}}</div>
+          </div>
+          <div class="add-coins">
+            +20
+          </div>
+        </div>
+      </div>
+      <div class="btn-group">
+        <div class="select-btn">大</div>
+        <div :class="{'select-btn':true, 'select-btn-pressed':true}" style="margin-right: 0">小</div>
+      </div>
+    </div>
+  </div>
 </div>
 <script src="http://dialer.cdn.cootekservice.com/web/internal/activities/js/vue.min.js"></script>
 <script src="http://dialer.cdn.cootekservice.com/web/internal/activities/js/myLib.js?v=1"></script>
+<script>
+  var clientWidth = document.documentElement.clientWidth || document.body.clientWidth;
+  document.documentElement.style.fontSize = clientWidth > 414 ? '20px' : 20 * clientWidth / 360 + 'px';
+</script>
 <script src="./js/index.js"></script>
 </body>
 </html>

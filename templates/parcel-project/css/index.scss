@@ -1,0 +1,288 @@
+@import "base";
+#content {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  .loading-container {
+    width: 100%;
+    height: 100%;
+    background: #5a4a8d;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    .close-icon {
+      width: 1.5rem;
+      height: 1.5rem;
+      font-family: dialer_icon1;
+      font-size: 1.5rem;
+      color: #fdcc00;
+      position: absolute;
+      top: 1rem;
+      right: 0.5rem;
+    }
+    .match-container {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      .head-container {
+        width: 4rem;
+        height: 4rem;
+        background: white;
+        border-radius: 50%;
+        border: 2px solid #ffda22;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        img {
+          width: 100%;
+        }
+      }
+    }
+    .vs-style{
+      width: 3.2rem;
+      height: 3.2rem;
+      position: absolute;
+      z-index: 1;
+    }
+    .loading-content {
+      width: 100%;
+      margin-top: 1rem;
+      text-align: center;
+      font-family: PingFangSC-Regular;
+      font-weight: bold;
+      font-size: 1rem;
+      color: #ffda22;
+    }
+    .loading-progress-panel {
+      width: 8.5rem;
+      height: 0.5rem;
+      border-radius: 1rem;
+      background: #3b3456;
+      margin-top: 1rem;
+      box-shadow: 0 0.15rem 0 0 #2f2949;
+      .loading-progress {
+        height: 0.5rem;
+        border-radius: 1rem;
+        background: #ff6450;
+        box-shadow: 0 0.15rem 0 0 #be3017;
+        transition: all .5s linear;
+      }
+    }
+    .tips {
+      width: 100%;
+      margin-top: 0.6rem;
+      text-align: center;
+      font-family: PingFangSC-Regular;
+      font-size: 0.6rem;
+      color: rgba(255, 255, 255, 0.7);
+    }
+  }
+}
+.play-page{
+  width: 100%;
+  .top-container {
+    width: 100%;
+    position: relative;
+    .bg {
+      width: 100%;
+    }
+    .bg-down {
+      margin-top: -1rem;
+    }
+    .hoster {
+      width: 7rem;
+      position: absolute;
+      bottom: 1.6rem;
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+    }
+  }
+  .bottom-container {
+    width: 100%;
+    background: #0b7155;
+    margin-top: -1px;
+    .play {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: flex-start;
+      .person-info-container {
+        width: 25%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        .head-container{
+          width: 3rem;
+          height: 3rem;
+          border-radius: 50%;
+          box-sizing: content-box;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          overflow: hidden;
+          margin-top: 2.5rem;
+          img {
+            width: 100%;
+          }
+        }
+        .head-container-select{
+          box-sizing: content-box;
+          border: 4px solid #ffda22;
+        }
+        .nickname {
+          width: 100%;
+          text-align: center;
+          font-family: PingFangSC-Regular;
+          font-size: 0.6rem;
+          color: #fdcc00;
+          margin-top: 0.2rem;
+        }
+        .coins-container{
+          width: 100%;
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          align-items: center;
+          img {
+            width: 0.6rem;
+            height: 0.6rem;
+            margin-right: 3px;
+          }
+          .coins-num {
+            font-family: PingFangSC-Regular;
+            font-size: 0.6rem;
+            color: #fdcc00;
+          }
+        }
+        .add-coins{
+          width: 100%;
+          text-align: center;
+          font-family: PingFangSC-Regular;
+          font-size: 0.6rem;
+          color: #fdcc00;
+        }
+      }
+      .play-info {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        .all-poker {
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
+          img {
+            display: inline-block;
+            width: 1.1rem;
+            height: 1.445rem;
+          }
+        }
+        &-tip{
+          width: 100%;
+          margin-top: 0.86rem;
+          text-align: center;
+          font-family: PingFangSC-Regular;
+          font-size: 0.6rem;
+          color: white;
+        }
+        &-coins{
+          width: 100%;
+          height: 2rem;
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          align-items: center;
+          img {
+            width: 2.2rem;
+          }
+          .num {
+            margin-top: 0.5rem;
+            font-family: Helvetica;
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: #fdcc00;
+          }
+        }
+        &-poker{
+          width: 100%;
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          align-items: center;
+          margin-top: 1.76rem;
+          img {
+            display: inline-block;
+            width: 6.15rem;
+          }
+          .rotateLeft {
+            transform: rotate(-5deg);
+          }
+          .rotateRight {
+            margin-left: -5rem;
+            transform: rotate(5deg);
+          }
+        }
+        &-select-tip{
+          width: 100%;
+          text-align: center;
+          margin-top: 0.4rem;
+          font-family: PingFangSC-Regular;
+          font-size: 0.7rem;
+          color: #fdcc00;
+        }
+      }
+    }
+    .btn-group {
+      width: 100%;
+      margin-top: 0.7rem;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      .select-btn {
+        width: 6.5rem;
+        height: 2.7rem;
+        margin-right: 1.5rem;
+        margin-bottom: 1.7rem;
+        box-shadow: 0 2px 0 0 #cb780b;
+        border-radius: 1.35rem;
+        line-height: 2.7rem;
+        text-align: center;
+        font-family: PingFangSC-Regular;
+        font-size: 1.2rem;
+        color: #7f4d00;
+        background: linear-gradient(to bottom, #ffef74, #ffda40);
+      }
+      .select-btn-pressed {
+        box-shadow: 0 2px 0 0 #cc530a;
+        background: linear-gradient(to bottom, #ffbf74, #fe8b40);
+      }
+    }
+  }
+}
+
+.match-success-enter{
+  transform: translateX(-200px);
+}
+.match-success-enter-active{
+  transition: all 0.5s;
+}
+.vs-scale-enter{
+  transform: scale(0);
+}
+.vs-scale-enter-active{
+  transition: all 0.5s;
+}

@@ -7,7 +7,8 @@ var vue = new Vue({
   el: '#content',
   data: {
     //data
-    baseNetService: 'http://localhost:8086/templates/chubaogame'
+    baseNetService: 'http://localhost:8086/templates/chubaogame',
+    test: 'hh'
   },
   created: function created() {
   },

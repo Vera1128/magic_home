@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<!--[if IE 7]> <html lang="en" class="ie7"> <![endif]-->
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+<head>
+  <script language="JavaScript">
+    base = "http://www.chubaogame.cn";
+    kindEditorOption = {
+      cssPath : base+'/common/plugins/kindEditor/plugins/code/prettify.css',
+      uploadJson : base+'/kindEditor/upload',
+      fileManagerJson : base+'/kindEditor/fileManager',
+      allowFileManager : true,
+      height: '500px'
+    };
+  </script>
+  <title>触宝游戏</title>
+
+  <!-- Meta -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+
+  <!-- CSS Global Compulsory-->
+  <link rel="stylesheet" href="./common/plugins/bootstrap/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="./home/assets/css/style.css" />
+  <link rel="stylesheet" href="./home/assets/css/headers/header2.css" />
+  <link rel="stylesheet" href="./home/assets/plugins/bootstrap/css/bootstrap-responsive.min.css" />
+  <link rel="stylesheet" href="./home/assets/css/style_responsive.css" />
+  <link rel="shortcut icon" href="./favicon.ico" />
+  <!-- CSS Implementing Plugins -->
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="./home/assets/plugins/flexslider/flexslider.css" type="text/css" media="screen" />
+  <link rel="stylesheet" href="./home/assets/plugins/bxslider/jquery.bxslider.css" />
+  <link rel="stylesheet" href="./home/assets/plugins/revolution_slider/css/rs-style.css" media="screen" />
+  <link rel="stylesheet" href="./home/assets/plugins/revolution_slider/rs-plugin/css/settings.css" media="screen" />
+
+  <!-- CSS Theme -->
+  <link rel="stylesheet" href="./home/assets/css/themes/default.css" id="style_color" />
+
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
+
+<body>
+<div id="content">
+  <div class="header">
+    <div class="container">
+      <!-- Logo -->
+      <div class="logo" style="padding:10px;">
+        <a href="./index.html"><img id="logo-header" src="./home/assets/img/logo.png" style="height: 40px" alt="Logo" /></a>
+      </div><!-- /logo -->
+
+      <!-- Menu -->
+      <nav class="navbar navbar-default">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav top2">
+            <li id="home">
+              <a href="./index.html">主页
+              </a>
+            </li>
+            <li id="about">
+              <a href="./about.html">公司简介
+              </a>
+            </li>
+            <li id="game">
+              <a href="./game.html">游戏
+              </a>
+            </li>
+            <li id="payment">
+              <a href="./payment.html">
+                充值
+              </a>
+            </li>
+            <li id="familySafety">
+              <a href="./familySafety/index.html" class="dropdown-toggle" data-toggle="dropdown">家长监护
+                <b class="caret" style="padding-bottom: 0"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="./familySafety/about.html">简介</a></li>
+                <li><a href="./familySafety/process.html">申请流程</a></li>
+                <li><a href="./familySafety/FAQs.html">常见问题</a></li>
+                <li><a href="./familySafety/contactUs.html">联系我们</a></li>
+              </ul>
+              <b class="caret-out"></b>
+            </li>
+            <li id="contactUs">
+              <a href="./contactUs.html">联系我们</a>
+            </li>
+            <li>
+              <a href="./register.html">会员注册
+              </a>
+            </li>
+          </ul>
+        </div><!-- /nav-collapse -->
+      </nav><!-- /navbar -->
+
+    </div><!-- /container -->
+  </div><!--/header -->
+  <!--=== End Header ===-->
+  <!-- formvalidation CSS-->
+  <link href="//cdn.bootcss.com/formvalidation/0.6.1/css/formValidation.min.css" rel="stylesheet">
+
+  <!--=== Breadcrumbs ===-->
+  <div class="breadcrumbs margin-bottom-40">
+    <div class="container">
+      <h1 class="color-green pull-left">会员注册</h1>
+    </div>
+    <!--/container-->
+  </div><!--/breadcrumbs-->
+  <!--=== End Breadcrumbs ===-->
+
+  <!--=== Content Part ===-->
+  <div class="container">
+    <div class="row">
+      <form class="reg-page" style="margin-bottom: 15%" method="post" id="regForm" action="./register.html">
+        <h3>会员注册</h3>
+
+        <div class="form-group ">
+          <label>用户名</label>
+          <input class="form-control" type="text" name="userName"/>
+        </div>
+        <div class="form-group ">
+          <label>真实姓名</label>
+          <input class="form-control" type="text" name="realName"/>
+        </div>
+        <div class="form-group ">
+          <label>身份证号</label>
+          <input class="form-control" type="text" name="idCard"/>
+        </div>
+        <div class="form-group ">
+          <label>邮箱</label>
+          <input class="form-control" type="text" name="email"/>
+        </div>
+        <div class="form-group ">
+          <label>手机号</label>
+          <input class="form-control" type="text" name="tel"/>
+        </div>
+        <div class="form-group ">
+          <label>密码</label>
+          <input class="form-control" type="password" name="password"/>
+        </div>
+        <div class="form-group ">
+          <label>确认密码</label>
+          <input class="form-control" type="password" name="passwordConfirm"/>
+        </div>
+
+        <div class="form-group input-group">
+          <input type="text" id="token" name="token" class="form-control" placeholder="验证码">
+          <span class="input-group-addon" style="padding: 0"><img src="./pcrimg" style="height: 30px"
+                                                                  id="checkCodeImg"></span>
+        </div>
+        <div id="registerMsg" class="col-lg-12" style="padding: 6px;display: none;"></div>
+        <button class="btn-u pull-right" type="submit">注册</button>
+        <hr/>
+      </form>
+    </div>
+    <!--/row-fluid-->
+  </div><!--/container-->
+  <!--=== End Content Part ===-->
+
+  <!--=== Footer ===-->
+  <div class="container" style="margin-top: 10px">
+    <div class="row margin-bottom-10">
+      <div class="col-md8">
+        <a href="./register.html" style="margin-right: 20px;font-size: medium"><img class="resize_small" src="./home/assets/img/others/cm.png">&nbsp;&nbsp;防沉迷 </a>
+        <a href="./familySafety/about.html" style="font-size: large;"><img class="resize_small" src="./home/assets/img/others/jh.png">&nbsp;&nbsp;家长监护 </a>
+      </div>
+    </div>
+    <p class="row">
+      <div class="col-md12 bg-light" style="margin-bottom: 0">
+    <p align="center" style="margin-bottom: 0">健康游戏公告: 抵制不良游戏 拒绝盗版游戏 注意自我保护 谨防受骗上当 适度游戏益脑 沉迷游戏伤身 合理安排时间 享受健康生活</p>
+    <p align="center" style="margin-bottom: 0">文化部网络游戏举报和联系电子邮箱Life-bd@cootek.cn 纠纷处理方式：联系客服</p>
+    <p align="center" style="margin-bottom: 0;height:80px">
+      <a target="_blank" href="http://sq.ccm.gov.cn/ccnt/sczr/login" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+        <img src="./home/assets/img/hulianwang.jpeg" style="height:80px">互联网文化经营单位
+      </a>
+    </p>
+  </div>
+  </p>
+</div>
+<!--=== End Footer ===-->
+
+<!--=== Copyright ===-->
+<div class="copyright">
+  <div class="container">
+    <div class="row">
+      <div class="col-md8">
+        <p align="center">上海触宝信息技术有限公司 版权所有 &copy;2016 <a href="http://www.miitbeian.gov.cn/" target="_blank">沪ICP备12012934号-2</a>
+          <a href="./license.html">沪网文[2016]0089-089</a></p>
+      </div>
+      <div style="width:300px;margin:0 auto; padding:20px 0;"><a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=31010402000740" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+        <img src="./home/assets/img/beiantu.png" style="float:left"><p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">沪公网安备
+        31010402000740号</p></a></div>
+    </div><!--/row-->
+  </div><!--/container-->
+</div><!--/copyright-->
+
+</div>
+<!-- JS Global Compulsory -->
+<script src="http://dialer.cdn.cootekservice.com/web/internal/activities/js/vue.min.js"></script>
+<script type="text/javascript" src="./common/plugins/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="./home/assets/js/modernizr.custom.js"></script>
+<script type="text/javascript" src="./common/plugins/bootstrap/dist/js/bootstrap.min.js"></script>
+
+<!-- JS Implementing Plugins -->
+<script type="text/javascript" src="./home/assets/plugins/flexslider/jquery.flexslider-min.js"></script>
+<script type="text/javascript" src="./home/assets/plugins/bxslider/jquery.bxslider.js"></script>
+<script type="text/javascript" src="./home/assets/plugins/back-to-top.js"></script>
+<script type="text/javascript" src="./home/assets/plugins/revolution_slider/rs-plugin/js/jquery.themepunch.plugins.min.js"></script>
+<script type="text/javascript" src="./home/assets/plugins/revolution_slider/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
+<!-- JS Page Level -->
+<script type="text/javascript" src="./home/assets/js/app.js"></script>
+<script type="text/javascript" src="./home/assets/js/pages/index.js"></script>
+<script type="text/javascript" src="./base/net.js"></script>
+<script type="text/javascript">
+  jQuery(document).ready(function() {
+    App.init();
+//        App.initSliders();
+    App.initBxSlider1();
+    Index.initRevolutionSlider();
+    Index.setNavActive();
+  });
+</script>
+<!--[if lt IE 9]>
+<script src="/common/js/html5shiv.js"></script>
+<script src="/common/js/respond.min.js"></script>
+<![endif]-->
+<!--formvalidation JS-->
+<script src="//cdn.bootcss.com/formvalidation/0.6.1/js/formValidation.min.js"></script>
+<script src="//cdn.bootcss.com/formvalidation/0.6.1/js/framework/bootstrap.min.js"></script>
+<script src="//cdn.bootcss.com/formvalidation/0.6.1/js/language/zh_CN.min.js"></script>
+<script type="text/javascript">
+  $(function () {
+    $('#regForm')
+      .formValidation({
+        framework: 'bootstrap',
+        icon: {
+          valid: 'glyphicon glyphicon-ok',
+          invalid: 'glyphicon glyphicon-remove',
+          validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+          userName: {
+            validators: {
+              notEmpty: {
+                message: '用户名不能为空'
+              },
+              stringLength: {
+                min: 5,
+                max: 15,
+                message: '用户名在5~15之间'
+              }
+            }
+          },
+          realName: {
+            validators: {
+              notEmpty: {
+                message: '用户名不能为空'
+              },
+              stringLength: {
+                min: 2,
+                max: 15,
+                message: '真实姓名长度在2~15之间'
+              }
+            }
+          },
+          idCard: {
+            validators: {
+              notEmpty: {
+                message: '身份证不能为空'
+              },
+              stringLength: {
+                min: 18,
+                max: 18,
+                message: '身份证号长度不符'
+              },
+              callback:{
+                callback: function (value, validator, $field) {
+                  if(IdCardValidate(value)) {
+                    return {
+                      valid: true,
+                      message: 'ok'
+                    }
+                  }else{
+                    return {
+                      valid: false,
+                      message: '无效的身份证号'
+                    }
+                  }
+                }
+              },
+              remote: {
+                message: '该身份证号已注册',
+                url: base + '/register/validate',
+                data: function (validator, $field, value) {
+                  return {
+                    type: 'idCard',
+                    value: validator.getFieldElements('idCard').val()
+                  };
+                },
+                delay: 1000,
+                type: 'POST'
+              }
+            }
+          },
+          password: {
+            validators: {
+              notEmpty: {
+                message: '密码不能为空'
+              },
+              stringLength: {
+                min: 6,
+                max: 20,
+                message: '密码长度为6~20之间'
+              }
+            }
+          },
+          passwordConfirm: {
+            validators: {
+              callback: {
+                callback: function (value, validator, $field) {
+                  var password = $("input[name='password']").val();
+//                                        console.log(password);
+//                                        console.log("confirm" + $field.val());
+                  if ($field.val() == password) {
+                    return {
+                      valid: true,
+                      message: 'ok'
+                    }
+                  } else {
+                    return {
+                      valid: false,
+                      message: '两次输入密码不一致'
+                    }
+                  }
+                }
+              }
+            }
+          },
+          email: {
+            validators: {
+              notEmpty: {
+                message: '邮箱不能为空'
+              },
+              emailAddress: {
+                message: '邮箱格式不正确'
+              },
+              remote: {
+                message: '邮箱已注册',
+                url: base + '/register/validate',
+                data: function (validator, $field, value) {
+                  return {
+                    type: 'email',
+                    value: validator.getFieldElements('email').val()
+                  };
+                },
+                delay: 1000,
+                type: 'POST'
+              }
+            }
+          },
+          tel: {
+            validators: {
+              notEmpty: {
+                message: '手机号不能为空'
+              },
+              stringLength: {
+                min: 11,
+                max: 15,
+                message: '手机号长度不符'
+              },
+              regexp: {
+                regexp: /^[0-9\-\+]+$/,
+                message: '手机号格式不符'
+              },
+              remote: {
+                message: '手机号已注册',
+                url: base + '/register/validate',
+                data: function (validator, $field, value) {
+                  return {
+                    type: 'tel',
+                    value: validator.getFieldElements('tel').val()
+                  };
+                },
+                delay: 1000,
+                type: 'POST'
+              }
+            }
+          }
+        }
+      })
+      .on('success.form.fv', function (e) {
+        e.preventDefault();
+        var $form = $(e.target),
+          fv = $form.data('formValidation');
+        // Use Ajax to submit form data
+        $.ajax({
+          url: $form.attr('action'),
+          type: 'POST',
+          data: $form.serialize(),
+          success: function (result) {
+            var data = eval("(" + result + ")");
+            console.log(data);
+            if (data.error != 0) {
+              $('#registerMsg').addClass('alert alert-danger').css('display', 'block').text(data.msg);
+              changeImg();
+            } else {
+              $('#registerMsg').removeClass('alert-danger').addClass('alert-success').css('display', 'block').text(data.msg);
+              alert(data.msg);
+              window.location.href = base + data.to;
+            }
+          }
+        });
+        fv.disableSubmitButtons(false);
+      });
+    $('#checkCodeImg').click(changeImg);
+  });
+
+
+  function changeImg() {
+    var imgSrc = $('#checkCodeImg');
+    var src = imgSrc.attr('src');
+    imgSrc.attr('src', chgUrl(src));
+  }
+  function chgUrl(url) {
+    var timestamp = (new Date()).valueOf();
+    if (url.indexOf('?') != -1) {
+      url = url.split('?')[0];
+    }
+    url = url + "?timestamp=" + timestamp;
+    return url;
+  }
+</script>
+<script>
+  var Wi = [ 7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2, 1 ];    // 加权因子
+  var ValideCode = [ 1, 0, 10, 9, 8, 7, 6, 5, 4, 3, 2 ];            // 身份证验证位值.10代表X
+  function IdCardValidate(idCard) {
+    idCard = trim(idCard.replace(/ /g, ""));               //去掉字符串头尾空格
+    if (idCard.length == 15) {
+      return isValidityBrithBy15IdCard(idCard);       //进行15位身份证的验证
+    } else if (idCard.length == 18) {
+      var a_idCard = idCard.split("");                // 得到身份证数组
+      if(isValidityBrithBy18IdCard(idCard)&&isTrueValidateCodeBy18IdCard(a_idCard)){   //进行18位身份证的基本验证和第18位的验证
+        return true;
+      }else {
+        return false;
+      }
+    } else {
+      return false;
+    }
+  }
+  /**
+   * 判断身份证号码为18位时最后的验证位是否正确
+   * @param a_idCard 身份证号码数组
+   * @return
+   */
+  function isTrueValidateCodeBy18IdCard(a_idCard) {
+    var sum = 0;                             // 声明加权求和变量
+    if (a_idCard[17].toLowerCase() == 'x') {
+      a_idCard[17] = 10;                    // 将最后位为x的验证码替换为10方便后续操作
+    }
+    for ( var i = 0; i < 17; i++) {
+      sum += Wi[i] * a_idCard[i];            // 加权求和
+    }
+    valCodePosition = sum % 11;                // 得到验证码所位置
+    if (a_idCard[17] == ValideCode[valCodePosition]) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  /**
+   * 验证18位数身份证号码中的生日是否是有效生日
+   * @param idCard 18位书身份证字符串
+   * @return
+   */
+  function isValidityBrithBy18IdCard(idCard18){
+    var year =  idCard18.substring(6,10);
+    var month = idCard18.substring(10,12);
+    var day = idCard18.substring(12,14);
+    var temp_date = new Date(year,parseFloat(month)-1,parseFloat(day));
+    // 这里用getFullYear()获取年份，避免千年虫问题
+    if(temp_date.getFullYear()!=parseFloat(year)
+      ||temp_date.getMonth()!=parseFloat(month)-1
+      ||temp_date.getDate()!=parseFloat(day)){
+      return false;
+    }else{
+      return true;
+    }
+  }
+  /**
+   * 验证15位数身份证号码中的生日是否是有效生日
+   * @param idCard15 15位书身份证字符串
+   * @return
+   */
+  function isValidityBrithBy15IdCard(idCard15){
+    var year =  idCard15.substring(6,8);
+    var month = idCard15.substring(8,10);
+    var day = idCard15.substring(10,12);
+    var temp_date = new Date(year,parseFloat(month)-1,parseFloat(day));
+    // 对于老身份证中的你年龄则不需考虑千年虫问题而使用getYear()方法
+    if(temp_date.getYear()!=parseFloat(year)
+      ||temp_date.getMonth()!=parseFloat(month)-1
+      ||temp_date.getDate()!=parseFloat(day)){
+      return false;
+    }else{
+      return true;
+    }
+  }
+  //去掉字符串头尾空格
+  function trim(str) {
+    return str.replace(/(^\s*)|(\s*$)/g, "");
+  }
+</script>
+</body>
+</html>

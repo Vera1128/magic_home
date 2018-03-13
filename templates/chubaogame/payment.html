@@ -108,55 +108,103 @@
   </div>
   <!--=== End Header ===-->
 
+  <!-- formvalidation CSS-->
+  <link href="//cdn.bootcss.com/formvalidation/0.6.1/css/formValidation.min.css" rel="stylesheet">
   <!--=== Breadcrumbs ===-->
   <div class="breadcrumbs margin-bottom-20">
     <div class="container">
-      <h1 class="color-green pull-left">所有游戏</h1>
-    </div><!--/container-->
+      <h1 class="color-green pull-left">游戏充值</h1>
+    </div>
+    <!--/container-->
   </div><!--/breadcrumbs-->
   <!--=== End Breadcrumbs ===-->
   <!--=== Content Part ===-->
   <div class="container">
     <div class="row blog-page blog-item">
       <!-- Left Sidebar -->
-      <div class="col-md-12">
-        <hr/>
-        <div class="blog margin-bottom-30 clearfix">
-          <div class="col-md-3">
-            <div class="blog-img"><img src="./upload/images/20160202/20160202182743_413353354.jpg" class="img-responsive" alt="" /></div>
-          </div>
-          <div class="col-md-9" style="margin-top: 30px">
-            <a href="./11.html">
-              <h3>传奇世界</h3>
-              <ul class="list-unstyled list-inline" style="margin-bottom: 10px">
-                <li><i class="fa fa-calendar"></i>  2016-02-02 18:00:45</li>
-                <li><i class="fa fa-tag"></i>  角色</li>
-              </ul>
-              <p>
-                《传奇世界-正版》是由盛大正版授权，蝴...
-              </p>
-            </a>
-          </div>
+      <div class="col-md-3">
+        <div class="headline"><h3>支付方式</h3></div>
+        <div id="payMethod" class="btn-group-vertical" role="group" aria-label="Vertical button group">
+          <button type="button" class="btn btn-default btn-success">支付宝</button>
+          <button type="button" class="btn btn-default">微信支付</button>
         </div>
-        <hr/>
-        <div class="blog margin-bottom-30 clearfix">
-          <div class="col-md-3">
-            <div class="blog-img"><img src="./upload/images/20160202/20160202181440_-974672185.jpg" class="img-responsive" alt="" /></div>
-          </div>
-          <div class="col-md-9" style="margin-top: 30px">
-            <a href="./12.html">
-              <h3>西游神传</h3>
-              <ul class="list-unstyled list-inline" style="margin-bottom: 10px">
-                <li><i class="fa fa-calendar"></i>  2016-02-02 18:00:21</li>
-                <li><i class="fa fa-tag"></i>  角色</li>
-              </ul>
-              <p>
-                西游神传...
-              </p>
-            </a>
-          </div>
+      </div>
+      <div class="col-md-9">
+        <div class="headline"><h4>您当前选择的是<span id="payMethodHead" style="color:#FF6600">支付宝</span>支付方式，请填写一下信息:</h4>
         </div>
+        <form role="form" id="paymentForm">
+          <div class="form-group">
+            <label>选择游戏</label>
+            <select
+                    name="gameId"
+                    class="form-control"
+            >
+              <option value="11"
+                      selected="selected"
+              >
+                传奇世界
+              </option>
+              <option value="12"
 
+              >
+                西游神传
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>充值账户手机号</label>
+            <input type="text" class="form-control" name="tel" placeholder="账户手机号">
+          </div>
+          <div class="form-group">
+            <label>确认手机号</label>
+            <input type="text" class="form-control" name="telConfirm" placeholder="确认手机号">
+          </div>
+          <div class="form-group">
+            <label>充值金额</label>
+            <select
+                    name="payValue"
+                    class="form-control"
+            >
+              <option value="198"
+
+              >
+                198 RMB
+              </option>
+              <option value="12"
+
+              >
+                12 RMB
+              </option>
+              <option value="2998"
+
+              >
+                2998 RMB
+              </option>
+              <option value="498"
+
+              >
+                498 RMB
+              </option>
+              <option value="6"
+
+              >
+                6 RMB
+              </option>
+              <option value="998"
+
+              >
+                998 RMB
+              </option>
+              <option value="30"
+
+              >
+                30 RMB
+              </option>
+            </select>
+            <p class="help-block">获得道具:<span id="getCurrency" style="color:#FF6600"> </span></p>
+          </div>
+          <button id="confirmPayment" class="btn-u btn-u-blue">确认充值</button>
+        </form>
       </div>
     </div>
   </div>
@@ -231,6 +279,120 @@
   var element = $('ul.breadcrumb li a').filter(function() {
     return this.href == url || url.href.indexOf(this.href) == 0;
   }).css('color','#72c02c');
+</script>
+<!--formvalidation JS-->
+<script src="//cdn.bootcss.com/formvalidation/0.6.1/js/formValidation.min.js"></script>
+<script src="//cdn.bootcss.com/formvalidation/0.6.1/js/framework/bootstrap.min.js"></script>
+<script src="//cdn.bootcss.com/formvalidation/0.6.1/js/language/zh_CN.min.js"></script>
+
+<!--lightbox JS -->
+<script src="./common/plugins/lightbox2/dist/js/lightbox.min.js"></script>
+<script>
+  var gamePaymentOptions = {};
+  gamePaymentOptions[11] = {};
+  gamePaymentOptions[11].rate = {};
+  gamePaymentOptions[11]['rate'][198] = '4460';
+  gamePaymentOptions[11]['rate'][12] = '480';
+  gamePaymentOptions[11]['rate'][2998] = '68868';
+  gamePaymentOptions[11]['rate'][498] = '11860';
+  gamePaymentOptions[11]['rate'][6] = '240';
+  gamePaymentOptions[11]['rate'][998] = '22780';
+  gamePaymentOptions[11]['rate'][30] = '1200';
+  gamePaymentOptions[11].currency = '元宝';
+  gamePaymentOptions[12] = {};
+  gamePaymentOptions[12].rate = {};
+  gamePaymentOptions[12]['rate'][2] = '20';
+  gamePaymentOptions[12]['rate'][500] = '5000';
+  gamePaymentOptions[12]['rate'][90] = '900';
+  gamePaymentOptions[12]['rate'][1000] = '10000';
+  gamePaymentOptions[12]['rate'][180] = '1800';
+  gamePaymentOptions[12]['rate'][30] = '300';
+  gamePaymentOptions[12]['rate'][10] = '100';
+  gamePaymentOptions[12].currency = '元宝';
+  //    console.log(gamePaymentOptions);
+
+  $(function () {
+    var gameId = $('select[name="gameId"]').val();
+    var rmb = $('select[name="payValue"]').val();
+    var rate = gamePaymentOptions[gameId].rate;
+    var currency = gamePaymentOptions[gameId].currency;
+    $("#getCurrency").html(rate[rmb] + currency);
+
+
+    $(".btn").click(function () {
+      $(this).siblings().removeClass("btn-success");
+      $(this).addClass("btn-success");
+      $("#payMethodHead").html($(this).html());
+    });
+
+    $('select[name="gameId"]').change(function () {
+      var gameId = $(this).val();
+      var payValue = $('select[name="payValue"]');
+      payValue.empty();
+      var rate = gamePaymentOptions[gameId].rate;
+      for(var key in rate){
+        payValue.append('<option value="'+key+'">'+key+' RMB</option>');
+      }
+      var rmb = payValue.val();
+      var currency = gamePaymentOptions[gameId].currency;
+      $("#getCurrency").html(rate[rmb] + currency);
+    });
+
+    $('select[name="payValue"]').change(function () {
+      var gameId = $('select[name="gameId"]').val();
+      var rmb = $(this).val();
+      var rate = gamePaymentOptions[gameId].rate;
+      var currency = gamePaymentOptions[gameId].currency;
+      $("#getCurrency").html(rate[rmb] + currency);
+    });
+
+    $('#paymentForm').formValidation({
+      framework: 'bootstrap',
+      icon: {
+        valid: 'glyphicon glyphicon-ok',
+        invalid: 'glyphicon glyphicon-remove',
+        validating: 'glyphicon glyphicon-refresh'
+      },
+      fields: {
+        tel: {
+          validators: {
+            notEmpty: {
+              message: '手机号不能为空'
+            },
+            stringLength: {
+              min: 11,
+              max: 15,
+              message: '手机号长度不符'
+            },
+            regexp: {
+              regexp: /^[0-9\-\+]+$/,
+              message: '手机号格式不符'
+            }
+          }
+        },
+        telConfirm: {
+          validators: {
+            callback: {
+              callback: function (value, validator, $field) {
+                var tel = $("input[name='tel']").val();
+                if ($field.val() == tel) {
+                  return {
+                    valid: true,
+                    message: 'ok'
+                  }
+                } else {
+                  return {
+                    valid: false,
+                    message: '两次输入手机号不一致'
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    });
+  });
 </script>
 </body>
 </html>

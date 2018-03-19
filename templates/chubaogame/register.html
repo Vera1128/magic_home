@@ -5,7 +5,7 @@
 <!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
 <head>
   <script language="JavaScript">
-    base = "http://www.chubaogame.cn";
+    base = "";
     kindEditorOption = {
       cssPath : base+'/common/plugins/kindEditor/plugins/code/prettify.css',
       uploadJson : base+'/kindEditor/upload',
@@ -24,6 +24,7 @@
 
   <!-- CSS Global Compulsory-->
   <link rel="stylesheet" href="./common/plugins/bootstrap/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="./common/plugins/idcode/jquery.idcode.css" />
   <link rel="stylesheet" href="./home/assets/css/style.css" />
   <link rel="stylesheet" href="./home/assets/css/headers/header2.css" />
   <link rel="stylesheet" href="./home/assets/plugins/bootstrap/css/bootstrap-responsive.min.css" />
@@ -121,7 +122,7 @@
   <!--=== Content Part ===-->
   <div class="container">
     <div class="row">
-      <form class="reg-page" style="margin-bottom: 15%" method="post" id="regForm" action="./register.html">
+      <form class="reg-page" style="margin-bottom: 15%" method="post" id="regForm" action="/register">
         <h3>会员注册</h3>
 
         <div class="form-group ">
@@ -155,8 +156,11 @@
 
         <div class="form-group input-group">
           <input type="text" id="token" name="token" class="form-control" placeholder="验证码">
-          <span class="input-group-addon" style="padding: 0"><img src="./pcrimg" style="height: 30px"
-                                                                  id="checkCodeImg"></span>
+          <span class="input-group-addon" style="padding: 0">
+            <!--<img src="/pcrimg" style="height: 30px" id="checkCodeImg">-->
+            <!--<input type="text" id="Txtidcode" class="txtVerification" />-->
+            <span id="idcode"></span>
+          </span>
         </div>
         <div id="registerMsg" class="col-lg-12" style="padding: 6px;display: none;"></div>
         <button class="btn-u pull-right" type="submit">注册</button>
@@ -206,8 +210,10 @@
 
 </div>
 <!-- JS Global Compulsory -->
-<script src="http://dialer.cdn.cootekservice.com/web/internal/activities/js/vue.min.js"></script>
 <script type="text/javascript" src="./common/plugins/jquery/dist/jquery.min.js"></script>
+<script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+<script src="./common/plugins/idcode/jquery.idcode.js"></script>
+
 <script type="text/javascript" src="./home/assets/js/modernizr.custom.js"></script>
 <script type="text/javascript" src="./common/plugins/bootstrap/dist/js/bootstrap.min.js"></script>
 
@@ -220,8 +226,8 @@
 <!-- JS Page Level -->
 <script type="text/javascript" src="./home/assets/js/app.js"></script>
 <script type="text/javascript" src="./home/assets/js/pages/index.js"></script>
-<script type="text/javascript" src="./base/net.js"></script>
 <script type="text/javascript">
+  $.idcode.setCode();
   jQuery(document).ready(function() {
     App.init();
 //        App.initSliders();
@@ -329,8 +335,6 @@
               callback: {
                 callback: function (value, validator, $field) {
                   var password = $("input[name='password']").val();
-//                                        console.log(password);
-//                                        console.log("confirm" + $field.val());
                   if ($field.val() == password) {
                     return {
                       valid: true,
@@ -416,7 +420,7 @@
             } else {
               $('#registerMsg').removeClass('alert-danger').addClass('alert-success').css('display', 'block').text(data.msg);
               alert(data.msg);
-              window.location.href = base + data.to;
+              location.reload();
             }
           }
         });

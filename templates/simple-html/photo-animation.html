@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>鼠标移入 图片变大并变化角度</title>
+  <style>
+    .photo-container {
+      width: 300px;
+      height: 80px;
+      border: 1px solid red;
+      overflow: hidden;
+      padding: 10px;
+    }
+    img {
+      display: block;
+      width: 100%;
+      transition: all .9s ease;
+    }
+    img:hover {
+      transform: scale(1.5) rotateZ(5deg);
+    }
+  </style>
+</head>
+<body>
+
+<div class="photo-container">
+  <img src="img/1.jpg">
+</div>
+
+<script>
+  var element = document.getElementsByClassName('photo-container')[0];
+  console.log(element.clientWidth);
+  console.log(element.clientHeight);
+  console.log(element.getBoundingClientRect());
+</script>
+
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>通过requestAnimationFrame实现动画</title>
+  <style>
+    #test {
+      width: 100px;
+      height: 1000px;
+      background: red;
+    }
+  </style>
+</head>
+<body>
+<div id="test">
+
+</div>
+<script>
+  var start = null;
+  var element = document.getElementById('test');
+  element.style.position = 'absolute';
+
+//  function step(timestamp) {
+//    if (!start) start = timestamp;
+//    var progress = timestamp - start;
+//    element.style.left = Math.min(progress / 10, 200) + 'px';
+//    if (progress < 2000) {
+//      window.requestAnimationFrame(step);
+//    }
+//  }
+//  window.requestAnimationFrame(step);
+
+  var currentHeight = element.clientHeight;
+  function addHeight() {
+    currentHeight = element.clientHeight;
+    element.style.height = (currentHeight * 0.8) + 'px';
+    if (currentHeight > 100){
+      console.log(currentHeight);
+      window.requestAnimationFrame(addHeight);
+    }
+  }
+  addHeight();
+</script>
+</body>
+</html>

@@ -38,6 +38,7 @@
     "gulp-sass": "^2.3.2",
     "gulp-uglify": "^1.5.4",
     "gulp-watch": "^4.3.8",
+    "http-proxy-middleware": "^0.18.0",
     "jshint": "^2.9.5",
     "socket.io": "^2.0.4"
   },

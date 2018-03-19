@@ -4,6 +4,7 @@ var gulp = require('gulp');
 // 引入组件
 var plugins = require('gulp-load-plugins')();//加载其他插件
 require('gulp-connect');
+var proxy = require('http-proxy-middleware');
 
 //配置
 jshint_config = {
@@ -110,8 +111,28 @@ gulp.task('webserver', function () {
     port: 8086,
     // host: '10.0.15.103'
     // host: '192.168.0.101'
+    middleware: function (connect, opt) {
+      return [
+        proxy('/register/validate', {
+          target: 'http://www.chubaogame.cn/register/validate',
+          changeOrigin:true,
+          pathRewrite: {'^/register/validate' : ''},
+        }),
+        proxy('/pcrimg', {
+          target: 'http://www.chubaogame.cn/pcrimg',
+          changeOrigin:true,
+          pathRewrite: {'^/pcrimg' : ''},
+        }),
+        proxy('/register', {
+          target: 'http://www.chubaogame.cn/register',
+          changeOrigin:true,
+          pathRewrite: {'^/register' : ''},
+        }),
+      ]
+    }
   });
 });
+
 gulp.task('html', function () {
   gulp.src('./templates/**/*.html')
     .pipe(plugins.connect.reload());

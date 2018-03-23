@@ -121,6 +121,44 @@
         flex-direction: column;
         justify-content: flex-start;
         align-items: center;
+        .count-down {
+          width: 4rem;
+          height: 1.55rem;
+          line-height: 1.55rem;
+          text-align: center;
+          margin: auto;
+          border-radius: 0.775rem;
+          background: rgba(255, 255, 255, 0.2);
+          position: relative;
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          align-items: center;
+          .alert {
+            display: inline-block;
+            width: 1.25rem;
+            height: 1.35rem;
+          }
+          .count-down-num {
+            height: 1.55rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #ffda22;
+          }
+        }
+        .count-down:after {
+          content: "";
+          width: 0;
+          height: 0;
+          border-width: 0.37rem;
+          border-style: solid;
+          border-color: rgba(255, 255, 255, 0.2) transparent transparent;
+          position: absolute;
+          bottom: -0.74rem;
+          left: 0;
+          right: 0;
+          margin: 0 auto;
+        }
         .head-container{
           width: 3rem;
           height: 3rem;
@@ -131,7 +169,8 @@
           justify-content: center;
           align-items: center;
           overflow: hidden;
-          margin-top: 2.5rem;
+          //margin-top: 2.5rem;
+          margin-top: 0.47rem;
           img {
             width: 100%;
           }
@@ -228,11 +267,15 @@
             width: 6.15rem;
           }
           .rotateLeft {
-            transform: rotate(-5deg);
+            transform: rotateZ(-5deg);
+            animation: poker-move-left 0.5s;
+            animation-fill-mode: forwards;
           }
           .rotateRight {
+            z-index: 2;
             margin-left: -5rem;
-            transform: rotate(5deg);
+            animation: poker-move-right 0.5s;
+            animation-fill-mode: forwards;
           }
         }
         &-select-tip{
@@ -285,4 +328,22 @@
 }
 .vs-scale-enter-active{
   transition: all 0.5s;
+}
+
+@keyframes poker-move-left {
+  from {
+    transform: translateY(-200px) rotateZ(0deg);
+  }
+  to {
+    transform: translateY(0) rotateZ(-5deg);
+  }
+}
+
+@keyframes poker-move-right {
+  from {
+    transform: translateY(-200px) rotateZ(0);
+  }
+  to {
+    transform: translateY(0) rotateZ(5deg);
+  }
 }

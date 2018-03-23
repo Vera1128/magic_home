@@ -19,7 +19,7 @@
       <div class="head-container">
         <img src="images/jasper.png">
       </div>
-      <transition name="vs-scale">
+      <transition name="vs-scale" @after-enter="afterEnterVsScale">
         <img src="images/vs.png" class="vs-style" v-show="matchSuccess">
       </transition>
     </div>
@@ -40,6 +40,10 @@
       <div class="play">
         <!--对手-->
         <div class="person-info-container">
+          <div class="count-down" :style="{'opacity': turnToWho ? 1:0}">
+            <img src="images/alert.png" class="alert">
+            <div class="count-down-num">{{countDown}}</div>
+          </div>
           <div :class="{'head-container':true, 'head-container-select': opponent.selected}">
             <img src="./images/danni.jpeg"/>
           </div>
@@ -73,13 +77,19 @@
             <div class="num">120</div>
           </div>
           <div class="play-info-poker">
-            <img src="images/1.png" class="rotateLeft">
-            <img src="images/poker.png" class="rotateRight">
+            <img :src="pokerGroup[pokerLeftIndex]" class="rotateLeft">
+            <transition name="poker-move">
+              <img src="images/poker.png" class="rotateRight" v-show="showPoker">
+            </transition>
           </div>
-          <div class="play-info-select-tip">轮到你选择</div>
+          <div class="play-info-select-tip">{{self.selected ? '轮到你选择':'对方正在选择ing'}}</div>
         </div>
         <!--自己-->
         <div class="person-info-container">
+          <div class="count-down" :style="{'opacity': !turnToWho ? 1:0}">
+            <img src="images/alert.png" class="alert">
+            <span class="count-down-num">{{countDown}}</span>
+          </div>
           <div :class="{'head-container':true, 'head-container-select': self.selected}">
             <img src="./images/xiaona.jpeg"/>
           </div>
@@ -96,8 +106,8 @@
         </div>
       </div>
       <div class="btn-group">
-        <div class="select-btn">大</div>
-        <div :class="{'select-btn':true, 'select-btn-pressed':true}" style="margin-right: 0">小</div>
+        <div class="select-btn" @click="selectLarge">大</div>
+        <div :class="{'select-btn':true, 'select-btn-pressed':true}" style="margin-right: 0" @click="selectSmaller">小</div>
       </div>
     </div>
   </div>

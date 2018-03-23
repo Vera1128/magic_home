@@ -69,7 +69,7 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({11:[function(require,module,exports) {
+})({16:[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -79,7 +79,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = function () {
   // console.log(classes);
 };
-},{}],14:[function(require,module,exports) {
+},{}],19:[function(require,module,exports) {
 var bundleURL = null;
 function getBundleURLCached() {
   if (!bundleURL) {
@@ -110,7 +110,7 @@ function getBaseURL(url) {
 exports.getBundleURL = getBundleURLCached;
 exports.getBaseURL = getBaseURL;
 
-},{}],12:[function(require,module,exports) {
+},{}],17:[function(require,module,exports) {
 var bundle = require('./bundle-url');
 
 function updateLink(link) {
@@ -142,13 +142,39 @@ function reloadCSS() {
 
 module.exports = reloadCSS;
 
-},{"./bundle-url":14}],10:[function(require,module,exports) {
+},{"./bundle-url":19}],15:[function(require,module,exports) {
 
         var reloadCSS = require('_css_loader');
         module.hot.dispose(reloadCSS);
         module.hot.accept(reloadCSS);
       
-},{"_css_loader":12}],9:[function(require,module,exports) {
+},{"_css_loader":17}],20:[function(require,module,exports) {
+module.exports="/dist/d5486b004ae630e9033da95c7335dedc.png";
+},{}],21:[function(require,module,exports) {
+module.exports="/dist/6b69dc32069d4ba6f3f2b938a076d28b.png";
+},{}],23:[function(require,module,exports) {
+module.exports="/dist/ca36b3a3d1ddefe3c90ed288006da41f.png";
+},{}],22:[function(require,module,exports) {
+module.exports="/dist/6373e9e3eab2032c8a342e10d8e3dd57.png";
+},{}],25:[function(require,module,exports) {
+module.exports="/dist/cb132b50fba5a89930aa062b87821e23.png";
+},{}],26:[function(require,module,exports) {
+module.exports="/dist/abe93959a3143832cec63bf93e8147c9.png";
+},{}],24:[function(require,module,exports) {
+module.exports="/dist/6114ab2d7560c3bb6ff8206480ac8862.png";
+},{}],32:[function(require,module,exports) {
+module.exports="/dist/9708865273bb0b1ae76235fef04f0e33.png";
+},{}],27:[function(require,module,exports) {
+module.exports="/dist/0012121e3622d05c4a81c8890d9cd7be.png";
+},{}],28:[function(require,module,exports) {
+module.exports="/dist/29731a76c1de99013b02c57f9d6e6d56.png";
+},{}],29:[function(require,module,exports) {
+module.exports="/dist/2be598142ccdda87cfa219349ba7ef15.png";
+},{}],30:[function(require,module,exports) {
+module.exports="/dist/fdb4c5e8862ee0fcf19cc2f56dec1cc0.png";
+},{}],31:[function(require,module,exports) {
+module.exports="/dist/66b5c2ea91c2c8bad27c204b63ab0a58.png";
+},{}],14:[function(require,module,exports) {
 "use strict";
 
 var _main = require("./main");
@@ -169,16 +195,20 @@ var vue = new Vue({
   data: {
     //data
     state: {
-      showLoadingPage: false
+      showLoadingPage: true
     },
     matchSuccess: false, //匹配成功
+    turnToWho: 0, //轮到谁选择 0表示是自己 1表示是对手
     progressWidth: 0,
+    showPoker: false,
+    countDown: 10,
+    countDownTimer: null,
     //对手的信息
     opponent: {
       'headImg': './images/danni.jpeg',
       'nickname': '丹妮',
       'coinNum': 2000,
-      'selected': false
+      'selected': false //用来标识现在轮到谁猜
     },
     //我的信息
     self: {
@@ -186,12 +216,17 @@ var vue = new Vue({
       'nickname': '小娜',
       'coinNum': 1000,
       'selected': true
-    }
+    },
+    //每次发的两张牌的信息
+    pokerLeftIndex: 0,
+    pokerRightIndex: 12,
+    pokerGroup: [require('../images/1.png'), require('../images/2.png'), require('../images/3.png'), require('../images/4.png'), require('../images/5.png'), require('../images/6.png'), require('../images/7.png'), require('../images/8.png'), require('../images/9.png'), require('../images/10.png'), require('../images/11.png'), require('../images/12.png'), require('../images/13.png')]
   },
   mounted: function mounted() {
     var _this = this;
 
     document.getElementById('content').style.display = 'block';
+    // 匹配阶段
     setTimeout(function () {
       _this.progressWidth = '100%';
       setTimeout(function () {
@@ -199,9 +234,54 @@ var vue = new Vue({
       }, 500);
     }, 500);
   },
-  methods: {}
+  methods: {
+    afterEnterVsScale: function afterEnterVsScale() {
+      var _this2 = this;
+
+      setTimeout(function () {
+        // 动画结束 匹配成功开始游戏
+        _this2.startPlay();
+        _this2.state.showLoadingPage = false;
+      }, 500);
+    },
+    startPlay: function startPlay() {
+      var _this3 = this;
+
+      // step1 发牌
+      this.showPoker = true;
+      this.pokerGroup.left = Math.floor(Math.random() * 13 + 1);
+      this.pokerGroup.right = Math.floor(Math.random() * 13 + 1);
+      while (this.pokerGroup.right === this.pokerGroup.left) {
+        this.pokerGroup.right = Math.floor(Math.random() * 13 + 1);
+      }
+      setTimeout(function () {
+        // step2 确定谁先猜
+        _this3.turnToWho = Math.random() >= 0.5 ? 0 : 1;
+        if (_this3.turnToWho) {
+          _this3.opponent.selected = true;
+          _this3.self.selected = false;
+        }
+        // step3 启动倒计时
+        _this3.startCountDown();
+      }, 500);
+    },
+    startCountDown: function startCountDown() {
+      var _this4 = this;
+
+      this.countDownTimer = setInterval(function () {
+        _this4.countDown--;
+        if (!_this4.countDown) clearInterval(_this4.countDownTimer);
+      }, 1000);
+    },
+    selectLarge: function selectLarge() {
+      if (self.selected) {}
+    },
+    selectSmaller: function selectSmaller() {
+      if (self.selected) {}
+    }
+  }
 });
-},{"./main":11,"../css/index.scss":10}],0:[function(require,module,exports) {
+},{"./main":16,"../css/index.scss":15,"../images/1.png":20,"../images/2.png":21,"../images/3.png":23,"../images/4.png":22,"../images/5.png":25,"../images/6.png":26,"../images/7.png":24,"../images/8.png":32,"../images/9.png":27,"../images/10.png":28,"../images/11.png":29,"../images/12.png":30,"../images/13.png":31}],0:[function(require,module,exports) {
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
 function Module() {
@@ -219,7 +299,7 @@ function Module() {
 module.bundle.Module = Module;
 
 if (!module.bundle.parent && typeof WebSocket !== 'undefined') {
-  var ws = new WebSocket('ws://' + window.location.hostname + ':50947/');
+  var ws = new WebSocket('ws://' + window.location.hostname + ':52434/');
   ws.onmessage = function(event) {
     var data = JSON.parse(event.data);
 
@@ -320,4 +400,4 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id)
   });
 }
-},{}]},{},[0,9])
+},{}]},{},[0,14])

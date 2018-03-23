@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>test阿里云上后端脚本是否可用</title>
+  <style>
+    .btn {
+      width: 50px;
+      height: 20px;
+      background: blue;
+    }
+  </style>
+</head>
+<body>
+<!--亲测是可以的-->
+<div class="btn">
+  确定
+</div>
+<script src="http://dialer.cdn.cootekservice.com/web/internal/activities/js/vue.min.js"></script>
+<script src="http://dialer.cdn.cootekservice.com/web/internal/activities/js/myLib.js?v=1"></script>
+<script src="http://dialer.cdn.cootekservice.com/web/internal/activities/js/dialer_native.js"></script>
+<script src="http://cdn.jsdelivr.net/npm/eruda"></script>
+<script>eruda.init();</script>
+<script>
+  var vue = new Vue({
+    el: '#content',
+    data: {
+      //data
+      token: '',
+      content: ''
+    },
+    created: function created() {
+    },
+    mounted: function mounted() {
+      var self = this;
+      myLib.ajax({
+        type: 'get',
+        dataType: 'json',
+        url: 'http://47.93.11.92/hello/artical_list',
+        success: function success(res) {
+          console.log(res);
+        },
+        error: function error() {
+          console.log('加此log用于测试');
+        }
+      });
+    },
+    methods: {
+
+    }
+  });
+</script>
+</body>
+</html>

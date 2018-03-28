@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>实现add(2)(3)与add(2, 3)</title>
+</head>
+<body>
+
+<script>
+  function add1(input) {
+    return function add2(input2){
+      return input + input2;
+    }
+  }
+  function add3(input1, input2) {
+    return input1 + input2;
+  }
+  console.log(add1(2)(3));
+  console.log(add3(2, 3));
+</script>
+
+</body>
+</html>

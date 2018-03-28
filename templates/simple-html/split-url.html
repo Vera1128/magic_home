@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>获取url中的query的参数和值</title>
+</head>
+<body>
+<script>
+  var url = 'https://baijiahao.baidu.com/s?id=1583617694892288463&wfr=spider&for=pc';
+  function splitURL(url) {
+    var targetObj = {};
+    var tmp = url.split('?')[1].split('&');
+    for(let i = 0; i < tmp.length; i++) {
+      targetObj[tmp[i].split('=')[0]] = tmp[i].split('=')[1];
+    }
+    return targetObj;
+  }
+  console.log(splitURL(url));
+</script>
+</body>
+</html>

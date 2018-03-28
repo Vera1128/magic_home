@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>拉平数组</title>
+</head>
+<body>
+
+<script>
+  var array = [1, [2, [3, [4], 5]]];
+  var newArray = [];
+//  方法一 使用递归
+//  function flattenArray(array) {
+//    array.forEach((item) => {
+//      if (Array.isArray(item)) {
+//        flattenArray(item);
+//      }else {
+//        newArray.push(item);
+//      }
+//    })
+//  }
+//  flattenArray(array);
+//  console.log(newArray);
+
+//  方法二 使用数组与字符串的转换
+  function flattenArray(array) {
+    return array.join().split(',').map((items) => {
+      return parseInt(items);
+    })
+  }
+  console.log(flattenArray(array));
+</script>
+
+</body>
+</html>

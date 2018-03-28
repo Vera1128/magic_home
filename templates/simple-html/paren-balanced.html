@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>检测string中的括号是否前后对应封闭</title>
+</head>
+<body>
+
+<script>
+  function isParenBalanced (str) {
+    return str.split('').reduce((counter, char) => {
+      if (counter < 0) {
+        return counter;
+      } else if (char === '(') {
+        return ++counter;
+      } else if (char === ')') {
+        return --counter;
+      } else {
+        return counter;
+      }
+    }, 0);
+  }
+  console.log(isParenBalanced('((abcds)'));
+  console.log(isParenBalanced('abcds'));
+  console.log(isParenBalanced('((abcds)))'));
+  console.log(isParenBalanced('(abcds)'));
+</script>
+</body>
+</html>

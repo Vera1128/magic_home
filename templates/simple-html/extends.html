@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>es5与es6的继承</title>
+</head>
+<body>
+<script>
+//  这种方法实现的继承无法向父类的构造函数传递参数
+//  父类
+  function Super() {
+    this.flag = true;
+  }
+//  在Super的原型上添加方法 提高复用性
+  Super.prototype.getFlag = function () {
+    return this.flag;
+  }
+//  定义一个子类
+  function Sub() {
+    this.subFlag = false;
+  }
+//  使用prototype实现继承
+  Sub.prototype = new Super();
+  Sub.prototype.constructor = Sub;
+  Sub.prototype.getSubFlag = function () {
+    return this.subFlag;
+  }
+
+  var obj1 = new Sub();
+  obj1.flag = false;
+  console.log(obj1.getFlag());
+  var obj2 = new Sub();
+  console.log(obj2.getFlag());
+
+//  结合借用构造函数和原型链的方法，实现组合继承，可向父类的构造函数传递参数
+  function Box(age) {
+    this.name = 'Lee';
+    this.age = age;
+  }
+  Box.prototype.run = function () {
+    return this.name + this.age;
+  }
+  function Desk(age) {
+    Box.call(this, age);
+  }
+  Desk.prototype = new Box();
+  Desk.prototype.constructor = Desk;
+  var desk = new Desk(18);
+  console.log(desk.run());
+
+//  es6的继承
+  class Father {
+    constructor(name) {
+      this.name = name;
+    }
+    getName () {
+      console.log(this.name);
+    }
+//    这里是父类的f方法
+    f() {
+      console.log('fffff');
+    }
+  }
+  class Son extends Father {
+    constructor(name, age){
+      super(name);
+      this.age = age;
+    }
+    getAge () {
+      console.log(this.age);
+    }
+//    这里是子类的f方法
+    f() {
+      console.log('ssssss');
+    }
+  }
+  var s1 = new Son('yang', 18);
+  s1.getName();
+  s1.getAge();
+  s1.f();
+  console.log(Son.__proto__ === Father);  //true
+  console.log(Son.prototype.__proto__ === Father.prototype);  //true
+  console.log(s1.__proto__);
+  console.log(Son.prototype);
+</script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>BFC</title>
+  <style>
+    .aside {
+      margin-bottom: 100px;
+      width: 100px;
+      height: 150px;
+      background: #f66;
+    }
+    .main {
+      margin-top: 100px;
+      height: 200px;
+      background: #fcc;
+    }
+    /*在盒子外面包一层div，通过改变div的属性使两个盒子分属于两个不同的BFC，以此来阻止margin重叠*/
+    .text {
+      /*触发BFC属性*/
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body>
+<div class="aside"></div>
+<div class="text">
+  <div class="main"></div>
+</div>
+</body>
+</html>

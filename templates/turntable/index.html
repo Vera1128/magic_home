@@ -4,20 +4,33 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
   <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, width=device-width">
   <title>大转盘</title>
-  <link rel="stylesheet" type="text/css" href="css/index.css"/>
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
+  <link rel="stylesheet" type="text/css" href="css/index.css?v=1"/>
 </head>
 <body>
 <div id="content">
-  <div id="bg">
-     <img class="pointer" src="img/pointer.png" alt="pointer" @click="startGetReward">
-     <img :class="{'turntable': true, 'turntable-transform': addTransition}" src="img/turntable.png" alt="turntable">
+  <div class="mask" v-if="showMask">
+    <div class="name-container">
+      <div class="name-container-tips">请输入你的姓名以开始抽奖</div>
+      <input class="input-container" v-model="name">
+      <button type="button" class="btn commit-btn" :class="name ? 'btn-primary':'btn-default' " @click="commitName">提交</button>
+    </div>
+  </div>
+
+  <div class="head-tips" :style="{'opacity': showHeadTips ? 1 : 0}">
+    {{!left_times ? '你还没有抽奖机会哦 继续加油~' : `您已拥有${left_times}次抽奖机会，点击立刻抽奖！`}}
+  </div>
+  <div class="lottery-box">
+    <img class="lottery-bg" src="img/bg-lottery.png"/>
+    <img class="pointer" :class="{'turntable-transform':addTransition}" src="img/playbtn.png" @click="startGetReward">
   </div>
 </div>
 <script src="http://dialer.cdn.cootekservice.com/web/internal/activities/js/vue.min.js"></script>
 <script src="http://dialer.cdn.cootekservice.com/web/internal/activities/js/myLib.js?v=1"></script>
-<script src="http://dialer.cdn.cootekservice.com/web/internal/activities/js/dialer_native.js"></script>
-<script src="http://cdn.jsdelivr.net/npm/eruda"></script>
-<script>eruda.init();</script>
-<script src="js/index.js"></script>
+<script>
+  var clientWidth = document.documentElement.clientWidth || document.body.clientWidth;
+  document.documentElement.style.fontSize = clientWidth > 414 ? '20px' : 20 * clientWidth / 360 + 'px';
+</script>
+<script src="js/index.js?v=121ew1ee12"></script>
 </body>
 </html>

@@ -1,9 +1,7 @@
-"use strict";
+'use strict';
 
-/**
- * Created by yangyang.xu on 2017/12/1.
- */
-myLib.remAdjust(20, 360);
+var URL = 'http://172.104.74.252:6543/';
+
 var vue = new Vue({
   el: '#content',
   data: {
@@ -15,55 +13,104 @@ var vue = new Vue({
     num: 0,
     offOn: true,
     rdm: 0,
-    transformNum: 0
+    transformNum: 0,
+    left_times: 0,
+    name: '',
+    showMask: true,
+    showHeadTips: false,
+    awardsGroup: ['教主带你打台球', '酸奶公仔', 'King叔请你吃蛋糕', '任选一位HR小姐姐吃饭', '笔记本', '谢谢参与', '100个在线抓娃娃币', 'TouchPal充电宝'],
+    award: '',
+    lotteryId: 0,
+    time: 1
   },
+  created: function created() {},
   mounted: function mounted() {
-    this.oPointer = document.getElementsByTagName("img")[0];
-    this.oTurntable = document.getElementsByTagName("img")[1];
+    this.oPointer = document.querySelector('.pointer');
   },
   methods: {
     startGetReward: function startGetReward() {
       var _this = this;
 
-      if (this.offOn) {
-        this.addTransition = false;
-        Vue.nextTick(function () {
-          _this.offOn = !_this.offOn;
-          _this.ratating();
-        });
+      this.name = localStorage.getItem('username');
+      if (this.name) {
+        // 获取抽奖次数
+        this.getLotteryTimes();
+        if (this.left_times >= 1) {
+          // 开始抽奖
+          myLib.ajax({
+            type: 'get',
+            dataType: 'json',
+            url: URL + 'start_lottery?name=' + this.name,
+            success: function success(res) {
+              if (res.code === 2000) {
+                var lottery_id = res.lottery_id;
+                console.log(res.lottery_id);
+                if (lottery_id <= 1) _this.lotteryId = 0;else if (lottery_id <= 41) _this.lotteryId = 1;else if (lottery_id <= 43) _this.lotteryId = 2;else if (lottery_id <= 55) _this.lotteryId = 3;else if (lottery_id <= 95) _this.lotteryId = 4;else if (lottery_id <= 97) _this.lotteryId = 5;else if (lottery_id <= 99) _this.lotteryId = 7;
+                if (_this.offOn) {
+                  _this.addTransition = false;
+                  _this.oPointer.style.webkitTransform = "rotate(" + 0 + "deg)";
+                  _this.oPointer.style.MozTransform = "rotate(" + 0 + "deg)";
+                  _this.oPointer.style.msTransform = "rotate(" + 0 + "deg)";
+                  _this.oPointer.style.OTransform = "rotate(" + 0 + "deg)";
+                  _this.oPointer.style.transform = "rotate(" + 0 + "deg)";
+                  Vue.nextTick(function () {
+                    _this.offOn = !_this.offOn;
+                    _this.ratating();
+                  });
+                }
+                _this.getLotteryTimes();
+              } else {
+                alert('服务器错误');
+              }
+            },
+            error: function error() {}
+          });
+        }
       }
     },
     ratating: function ratating() {
       var _this2 = this;
 
-      while (Math.floor(this.rdm / 360) < 2) {
-        this.rdm = Math.floor(Math.random() * 3600);
-      }
-      this.rdm = Math.floor(Math.random() * 3600);
-      console.log(this.rdm);
-      this.transformNum += this.rdm;
-      this.addTransition = true;
-      Vue.nextTick(function () {
-        _this2.oTurntable.style.transform = "rotate(" + _this2.transformNum + "deg)";
+      this.rdm = Math.floor(Math.random() * 4 + 2);
+      this.transformNum = this.rdm * 360 + this.lotteryId * 45 + Math.floor(Math.random() * 43 + 1);
+      setTimeout(function () {
+        _this2.addTransition = true;
+        _this2.oPointer.style.transform = "rotate(" + _this2.transformNum + "deg)";
+        _this2.oPointer.style.webkitTransform = "rotate(" + _this2.transformNum + "deg)";
+        _this2.oPointer.style.MozTransform = "rotate(" + _this2.transformNum + "deg)";
+        _this2.oPointer.style.msTransform = "rotate(" + _this2.transformNum + "deg)";
+        _this2.oPointer.style.OTransform = "rotate(" + _this2.transformNum + "deg)";
         setTimeout(function () {
           _this2.offOn = !_this2.offOn;
-          _this2.num = _this2.transformNum % 360;
-          if (_this2.num <= _this2.cat * 1) {
-            alert("4999元");
-          } else if (_this2.num <= _this2.cat * 2) {
-            alert("50元");
-          } else if (_this2.num <= _this2.cat * 3) {
-            alert("10元");
-          } else if (_this2.num <= _this2.cat * 4) {
-            alert("5元");
-          } else if (_this2.num <= _this2.cat * 5) {
-            alert("免息服务");
-          } else if (_this2.num <= _this2.cat * 6) {
-            alert("提高白条");
-          } else if (_this2.num <= _this2.cat * 7) {
-            alert("未中奖");
-          }
+          alert(_this2.awardsGroup[_this2.lotteryId]);
         }, 4000);
+      });
+    },
+    commitName: function commitName() {
+      if (!this.name) {
+        return;
+      }
+      localStorage.setItem('username', this.name);
+      console.log(localStorage.getItem('username'));
+      this.getLotteryTimes();
+    },
+    getLotteryTimes: function getLotteryTimes() {
+      var _this3 = this;
+
+      myLib.ajax({
+        type: 'get',
+        dataType: 'json',
+        url: URL + 'get_lottery_times?name=' + this.name,
+        success: function success(res) {
+          if (res.code === 2000) {
+            _this3.showMask = false;
+            _this3.showHeadTips = true;
+            _this3.left_times = res.left_times;
+          } else {
+            alert('服务器错误');
+          }
+        },
+        error: function error() {}
       });
     }
   }

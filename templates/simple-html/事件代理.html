@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>事件代理</title>
+</head>
+<body>
+<ul class="ul-style">
+	<li class="li-style">1111</li>
+	<li class="li-style">2222</li>
+	<li class="li-style">3333</li>
+	<li class="li-style">4444</li>
+	<li class="li-style">5555</li>
+	<li class="li-style">6666</li>
+	<li class="li-style">7777</li>
+	<li class="li-style">8888</li>
+	<li class="li-style">9999</li>
+</ul>
+<script type="text/javascript">
+	// var liGroup = document.querySelectorAll('.li-style');
+	// liGroup.forEach((item, index) => {
+	// 	item.onclick = function () {
+	// 		alert('123');
+	// 	}
+	// })
+	var ul = document.querySelector('.ul-style');
+	ul.onclick = function (ev) {
+		var ev = ev || window.event;
+		var target = ev.target || ev.srcElement;
+		console.log(target.innerHTML);
+	}
+</script>
+</body>
+</html>

@@ -17,6 +17,8 @@
 </head>
 <body>
 <div id="content">
+  {{content}}
+  <button @click="change">点击确定</button>
 </div>
 <script src="http://dialer.cdn.cootekservice.com/web/internal/activities/js/vue.min.js"></script>
 <script src="http://dialer.cdn.cootekservice.com/web/internal/activities/js/myLib.js?v=1"></script>
@@ -24,13 +26,12 @@
 <script src="http://cdn.jsdelivr.net/npm/eruda"></script>
 <script>eruda.init();</script>
 <script>
-  myLib.remAdjust(20, 360);
   var vue = new Vue({
     el: '#content',
     data: {
       //data
       token: '',
-      content: ''
+      content: 'hhaha'
     },
     created: function created() {
     },
@@ -51,7 +52,9 @@
       });
     },
     methods: {
-
+      change: function change() {
+        alert('你是笨蛋');
+      }
     }
   });
 </script>

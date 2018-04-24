@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, width=device-width">
+  <title>上传白名单</title>
+  <link rel="stylesheet" type="text/css" href="css/upload-white-list.css"/>
+  <link rel="stylesheet" href="css/bootstrap.css"/>
+</head>
+<body>
+<div id="content">
+  <!--上传页面-->
+  <div id="upload-page" v-if="!selectListIndex">
+    <div class="upload-container">
+      <div class="upload-content">
+        <input type="file" name="file" id="file"/>
+        <textarea placeholder="请填写备注" name="note" v-model="note"></textarea>
+        <button class="btn btn-primary" @click="uploadWhiteList">提交</button>
+        <button class="btn btn-primary go-to-operation-list" @click="goToOperationList">操作记录列表</button>
+      </div>
+    </div>
+    <div class="list-container">
+      <div class="table-title">
+        白名单列表
+      </div>
+      <table class="table">
+        <thead>
+        <tr>
+          <th class="text-center" style="width: 10%">gid</th>
+          <th class="text-center" style="width: 10%">操作人</th>
+          <th class="text-center" style="width: 20%">操作时间</th>
+          <th class="text-center" style="width: 10%">白名单人数</th>
+          <th class="text-center" style="width: 20%">备注</th>
+          <th class="text-center" style="width: 30%">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="(item, index) in whiteListGroup" class="success">
+          <td class="text-center">{{item.id}}</td>
+          <td class="text-center">{{item.owner}}</td>
+          <td class="text-center">{{item.date}}</td>
+          <td class="text-center">{{item.num}}</td>
+          <td class="text-center">{{item.note}}</td>
+          <td class="text-center">
+            <button class="btn btn-primary" @click="changeGidInfo(3, item.id)">追加</button>
+            <button class="btn btn-danger" @click="changeGidInfo(1, item.id)">失效</button>
+            <button class="btn btn-default" @click="changeGidInfo(2, item.id)">还原</button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <div class="bottom-loading" v-show="state.showBottomLoading">
+        <img src="img/loading.gif" id="loading-gif" v-if="!state.listFinish">
+        <div class="no-more-text" id="no-more-text" v-else>已经到底啦~</div>
+      </div>
+    </div>
+    <div class="mask">
+      <div class="mask-content">
+        <div class="title">请输入追加的电话号码</div>
+        <textarea v-model="phoneStr" placeholder="电话号码以#分隔 如13163297238#13163296213"></textarea>
+        <div class="btn-groups">
+          <button class="btn btn-default" @click="changeGidInfo(2, item.id)">取消</button>
+          <button class="btn btn-primary" @click="changeGidInfo(3, item.id)">确定</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--操作结果查询页面-->
+  <div id="operation-list-page" v-else>
+    <div class="select-container">
+      <div class="select-content">
+        <div class="select-query-type">
+          <input type="radio" name="query-type" value="0" checked @change="changeQueryType(0)"> 根据gid查询
+          <input type="radio" name="query-type" value="1" @change="changeQueryType(1)"> 根据时间区间查询
+        </div>
+        <div class="query-content">
+          <div class="query-content-gid" v-if="state.showQueryGid">
+            <input id="query-content-input-gid" class="query-content-input-gid" type="text" placeholder="请输入gid">
+            <button class="btn btn-primary">查询</button>
+          </div>
+          <div class="query-content-date" v-else>
+            <span>开始时间：</span><input type="date" v-model="startTime">
+            结束时间：<input type="date" v-model="endTime">
+            <br>
+            <button class="btn btn-primary">查询</button>
+          </div>
+        </div>
+        <button class="btn btn-primary back-to-white-list" @click="backToWhiteList">返回</button>
+      </div>
+    </div>
+    <div class="query-result">
+      <div class="table-title">
+        操作记录列表
+      </div>
+      <table class="table">
+        <thead>
+        <tr>
+          <th class="text-center" style="width: 10%">gid</th>
+          <th class="text-center" style="width: 10%">操作人</th>
+          <th class="text-center" style="width: 20%">操作时间</th>
+          <th class="text-center" style="width: 10%">白名单人数</th>
+          <th class="text-center" style="width: 20%">备注</th>
+          <th class="text-center" style="width: 30%">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="(item, index) in whiteListGroup" class="success">
+          <td class="text-center">{{item.id}}</td>
+          <td class="text-center">{{item.owner}}</td>
+          <td class="text-center">{{item.date}}</td>
+          <td class="text-center">{{item.num}}</td>
+          <td class="text-center">{{item.note}}</td>
+          <td class="text-center">
+            <button class="btn btn-primary">追加</button>
+            <button class="btn btn-danger">失效</button>
+            <button class="btn btn-default">还原</button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<script src="http://dialer.cdn.cootekservice.com/web/internal/activities/js/vue.min.js"></script>
+<script src="http://dialer.cdn.cootekservice.com/web/internal/activities/js/myLib.js?v=1"></script>
+<script src="js/upload-white-list.js"></script>
+</body>
+</html>

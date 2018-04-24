@@ -128,6 +128,11 @@ gulp.task('webserver', function () {
           changeOrigin:true,
           pathRewrite: {'^/register' : ''},
         }),
+        proxy('/artical_list', {
+          target: 'http://10.0.32.219:8877/artical_list',
+          changeOrigin:true,
+          pathRewrite: {'^/artical_list' : ''},
+        })
       ]
     }
   });

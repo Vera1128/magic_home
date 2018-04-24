@@ -43,6 +43,7 @@
     "socket.io": "^2.0.4"
   },
   "dependencies": {
+    "mysql": "^2.15.0",
     "node-sass": "^4.7.2"
   }
 }

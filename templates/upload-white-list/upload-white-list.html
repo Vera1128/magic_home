@@ -28,23 +28,29 @@
         <tr>
           <th class="text-center" style="width: 10%">gid</th>
           <th class="text-center" style="width: 10%">操作人</th>
-          <th class="text-center" style="width: 20%">操作时间</th>
+          <th class="text-center" style="width: 20%">创建时间</th>
+          <th class="text-center" style="width: 20%">上次操作时间</th>
           <th class="text-center" style="width: 10%">白名单人数</th>
-          <th class="text-center" style="width: 20%">备注</th>
-          <th class="text-center" style="width: 30%">操作</th>
+          <th class="text-center" style="width: 15%">备注</th>
+          <th class="text-center" style="width: 15%">操作</th>
         </tr>
         </thead>
         <tbody>
         <tr v-for="(item, index) in whiteListGroup" class="success">
-          <td class="text-center">{{item.id}}</td>
-          <td class="text-center">{{item.owner}}</td>
-          <td class="text-center">{{item.date}}</td>
-          <td class="text-center">{{item.num}}</td>
+          <td class="text-center">{{item.gid}}</td>
+          <td class="text-center">{{item.last_operator}}</td>
+          <td class="text-center">{{item.create_time}}</td>
+          <td class="text-center">{{item.last_operatored_time}}</td>
+          <td class="text-center">{{item.count}}</td>
           <td class="text-center">{{item.note}}</td>
           <td class="text-center">
-            <button class="btn btn-primary" @click="changeGidInfo(3, item.id)">追加</button>
-            <button class="btn btn-danger" @click="changeGidInfo(1, item.id)">失效</button>
-            <button class="btn btn-default" @click="changeGidInfo(2, item.id)">还原</button>
+            <template v-if="!item.gid_status">
+              <button class="btn btn-primary" @click="openMask(item.gid)">追加</button>
+              <button class="btn btn-danger" @click="changeGidInfo(1, item.gid)">失效</button>
+            </template>
+            <template v-else>
+              <button class="btn btn-default" @click="changeGidInfo(2, item.gid)">还原</button>
+            </template>
           </td>
         </tr>
         </tbody>
@@ -54,13 +60,13 @@
         <div class="no-more-text" id="no-more-text" v-else>已经到底啦~</div>
       </div>
     </div>
-    <div class="mask">
+    <div class="mask" v-if="state.showMask">
       <div class="mask-content">
         <div class="title">请输入追加的电话号码</div>
         <textarea v-model="phoneStr" placeholder="电话号码以#分隔 如13163297238#13163296213"></textarea>
         <div class="btn-groups">
-          <button class="btn btn-default" @click="changeGidInfo(2, item.id)">取消</button>
-          <button class="btn btn-primary" @click="changeGidInfo(3, item.id)">确定</button>
+          <button class="btn btn-default" @click="closeMask">取消</button>
+          <button class="btn btn-primary" @click="changeGidInfo(3, 0)">确定</button>
         </div>
       </div>
     </div>
@@ -75,14 +81,14 @@
         </div>
         <div class="query-content">
           <div class="query-content-gid" v-if="state.showQueryGid">
-            <input id="query-content-input-gid" class="query-content-input-gid" type="text" placeholder="请输入gid">
-            <button class="btn btn-primary">查询</button>
+            <input id="query-content-input-gid" class="query-content-input-gid" type="text" placeholder="请输入gid" v-model="queryGid">
+            <button class="btn btn-primary" @click="queryOperationList(1)">查询</button>
           </div>
           <div class="query-content-date" v-else>
             <span>开始时间：</span><input type="date" v-model="startTime">
             结束时间：<input type="date" v-model="endTime">
             <br>
-            <button class="btn btn-primary">查询</button>
+            <button class="btn btn-primary" @click="queryOperationList(2)">查询</button>
           </div>
         </div>
         <button class="btn btn-primary back-to-white-list" @click="backToWhiteList">返回</button>
@@ -96,33 +102,25 @@
         <thead>
         <tr>
           <th class="text-center" style="width: 10%">gid</th>
-          <th class="text-center" style="width: 10%">操作人</th>
-          <th class="text-center" style="width: 20%">操作时间</th>
-          <th class="text-center" style="width: 10%">白名单人数</th>
-          <th class="text-center" style="width: 20%">备注</th>
-          <th class="text-center" style="width: 30%">操作</th>
+          <th class="text-center" style="width: 30%">操作人</th>
+          <th class="text-center" style="width: 30%">操作时间</th>
+          <th class="text-center" style="width: 30%">操作状态</th>
         </tr>
         </thead>
         <tbody>
-        <tr v-for="(item, index) in whiteListGroup" class="success">
-          <td class="text-center">{{item.id}}</td>
-          <td class="text-center">{{item.owner}}</td>
-          <td class="text-center">{{item.date}}</td>
-          <td class="text-center">{{item.num}}</td>
-          <td class="text-center">{{item.note}}</td>
-          <td class="text-center">
-            <button class="btn btn-primary">追加</button>
-            <button class="btn btn-danger">失效</button>
-            <button class="btn btn-default">还原</button>
-          </td>
+        <tr v-for="(item, index) in operationQuery" class="success">
+          <td class="text-center">{{item.gid}}</td>
+          <td class="text-center">{{item.operator}}</td>
+          <td class="text-center">{{item.operated_time}}</td>
+          <td class="text-center">{{item.operation}}</td>
         </tr>
         </tbody>
       </table>
     </div>
   </div>
 </div>
+<script src="./js/jquery-3.2.1.min.js"></script>
 <script src="http://dialer.cdn.cootekservice.com/web/internal/activities/js/vue.min.js"></script>
-<script src="http://dialer.cdn.cootekservice.com/web/internal/activities/js/myLib.js?v=1"></script>
 <script src="js/upload-white-list.js"></script>
 </body>
 </html>

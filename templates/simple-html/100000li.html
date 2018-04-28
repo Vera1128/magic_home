@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <!--页面中插入100000个li，并绑定事件-->
+</head>
+<body>
+
+<ul id="li-list">
+
+</ul>
+<script>
+  (function () {
+    var ulContainer = document.getElementById('li-list');
+    for (let i = 0; i < 100000; i++) {
+      let liItem = document.createElement('li');
+      liItem.innerText = i + 1;
+      ulContainer.appendChild(liItem);
+    }
+    ulContainer.addEventListener('click', function (e) {
+      var ev = e || window.event;
+      var target = ev.target || ev.srcElement;
+      if (target.tagName == 'li') {
+        console.log(target.innerText);
+      }
+    })
+  })();
+
+  (function () {
+    var ulContainer = document.getElementById('li-list');
+    var fragment = document.createDocumentFragment();
+    for (let i = 0; i < 100000; i++) {
+      let liItem = document.createElement('li');
+      liItem.innerText = i + 1;
+      fragment.appendChild(liItem);
+    }
+    ulContainer.addEventListener('click', function (e) {
+      var ev = e || window.event;
+      var target = ev.target || ev.srcElement;
+      if (target.tagName == 'li') {
+        console.log(target.innerText);
+      }
+    })
+  })();
+
+</script>
+</body>
+</html>

@@ -46,10 +46,10 @@
           <td class="text-center">
             <template v-if="!item.gid_status">
               <button class="btn btn-primary" @click="openMask(item.gid)">追加</button>
-              <button class="btn btn-danger" @click="changeGidInfo(1, item.gid)">失效</button>
+              <!--<button class="btn btn-danger" @click="changeGidInfo(1, item.gid)">失效</button>-->
             </template>
             <template v-else>
-              <button class="btn btn-default" @click="changeGidInfo(2, item.gid)">还原</button>
+              <!--<button class="btn btn-default" @click="changeGidInfo(2, item.gid)">还原</button>-->
             </template>
           </td>
         </tr>

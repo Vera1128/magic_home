@@ -113,39 +113,6 @@ var vue = new Vue({
           console.log('加此log用于测试');
         }
       });
-      // $.ajax({
-      //   url: URI + '/fellow_townsman/ops_get_spider_info?_token=' + TOKEN,
-      //   type: 'post',
-      //   dataType: 'json',
-      //   data: JSON.stringify({
-      //     obj_user_id: '',
-      //     id: '' + videoList[videoList.length - 1].id
-      //   }),
-      //   success: function success (res) {
-      //     if (res.result.video_list.length < 1) {
-      //       listFinish = true;
-      //       $('#loading-gif').hide();
-      //       $('#no-more-text').show();
-      //     } else {
-      //       var innerHTML = document.querySelector('#video-list').innerHTML;
-      //       currentVideoList = res.result.video_list;
-      //       currentVideoList.forEach(function (item, index) {
-      //         innerHTML += '<tr class="success">' +
-      //           '<td class="td-center text-center" style="width: 10%">' + (videoList.length + index + 1) + '</td>' +
-      //           '<td class="td-center text-center" style="width: 10%">' + item.platform + '</td>' +
-      //           '<td class="td-center text-center" style="width: 20%">' + item.create_time + '</td>' +
-      //           '<td class="td-center text-center" style="width: 30%">' + '<img src="' + item.images + '" class="video-image"></td>' +
-      //           '<td class="td-center text-center">' + '<button class="btn btn-primary" onclick="previewSpiderVideo(\'' + item.video + '\', \'' + item.id + '\')">查看视频</button></td></tr>';
-      //       });
-      //       document.querySelector('#video-list').innerHTML = innerHTML;
-      //       videoList = videoList.concat(res.result.video_list);
-      //       $('.bottom-loading').hide();
-      //       $('#loading-gif').hide();
-      //       enableOnScroll = true;
-      //     }
-      //   },
-      //   error: function error (res) {}
-      // });
     },
     uploadWhiteList: function uploadWhiteList() {
       var file = document.getElementById('file').files[0];
@@ -219,6 +186,27 @@ var vue = new Vue({
           dataType: 'json',
           success: function success(res) {
             console.log(JSON.stringify(res));
+            res.forEach(function (item, index) {
+              var obj = {};
+              var key = Object.keys(item)[0];
+              obj.gid = key;
+              obj.operator = item[key].operator;
+              obj.operated_time = item[key].create_time;
+              switch (item[key].operated_status) {
+                case 0:
+                  obj.operation = '创建';
+                  break;
+                case 1:
+                  obj.operation = '失效';
+                  break;
+                case 2:
+                  obj.operation = '生效';
+                  break;
+                default:
+                  obj.operation = '追加';
+              }
+              _this4.operationQuery.push(obj);
+            });
           }
         });
       } else {
@@ -264,18 +252,48 @@ var vue = new Vue({
       }
     },
     changeGidInfo: function changeGidInfo(flag, gid) {
+      var _this5 = this;
+
       if (flag != '3') {
+        if (flag == '1' && confirm('是否确认使该gid失效') || flag == '2' && confirm('是否确认使该gid还原')) {
+          $.ajax({
+            url: URI + '/ad_whitelist_uploader/change_gid_info',
+            type: 'post',
+            data: JSON.stringify({
+              change_type: flag,
+              gid: gid
+            }),
+            dataType: 'json',
+            success: function success(res) {
+              console.log(res);
+            }
+          });
+        }
+      } else {
+        if (!this.phoneStr) {
+          alert('请填写需要追加的手机号');
+          return;
+        }
         $.ajax({
           url: URI + '/ad_whitelist_uploader/change_gid_info',
           type: 'post',
           data: JSON.stringify({
-            change_type: parseInt(flag),
-            gid: gid
+            change_type: 3,
+            gid: this.changeInfoGid,
+            phones_str: this.phoneStr
           }),
           dataType: 'json',
           success: function success(res) {
             console.log(res);
-          }
+            if (res.error_code == 2000) {
+              alert('追加成功');
+            } else {
+              alert('追加失败 请稍后再试');
+            }
+            _this5.closeMask();
+            location.reload();
+          },
+          error: function error() {}
         });
       }
     },

@@ -11,30 +11,53 @@
 
 </ul>
 <script>
-  (function () {
-    var ulContainer = document.getElementById('li-list');
-    for (let i = 0; i < 100000; i++) {
-      let liItem = document.createElement('li');
-      liItem.innerText = i + 1;
-      ulContainer.appendChild(liItem);
-    }
-    ulContainer.addEventListener('click', function (e) {
-      var ev = e || window.event;
-      var target = ev.target || ev.srcElement;
-      if (target.tagName == 'li') {
-        console.log(target.innerText);
-      }
-    })
-  })();
+//  (function () {
+//    var ulContainer = document.getElementById('li-list');
+//    for (let i = 0; i < 100000; i++) {
+//      let liItem = document.createElement('li');
+//      liItem.innerText = i + 1;
+//      ulContainer.appendChild(liItem);
+//    }
+//    ulContainer.addEventListener('click', function (e) {
+//      var ev = e || window.event;
+//      var target = ev.target || ev.srcElement;
+//      if (target.tagName == 'li') {
+//        console.log(target.innerText);
+//      }
+//    })
+//  })();
 
+//  通过使用documentFragment和分治 使速度明显提升
   (function () {
     var ulContainer = document.getElementById('li-list');
-    var fragment = document.createDocumentFragment();
-    for (let i = 0; i < 100000; i++) {
-      let liItem = document.createElement('li');
-      liItem.innerText = i + 1;
-      fragment.appendChild(liItem);
+//    防御性编程
+    if (!ulContainer) return;
+    const total = 100000;
+    const batchSize = 4;
+    const batchCount = total / batchSize;
+    let batchDone = 0;
+
+//    采用documentFragment
+    function appendItems() {
+      var fragment = document.createDocumentFragment();
+      for (let i = 0; i < batchSize; i++) {
+        let liItem = document.createElement('li');
+        liItem.innerText = batchDone * batchSize + i + 1;
+        fragment.appendChild(liItem);
+      }
+      ulContainer.appendChild(fragment);
+      batchDone++;
+      doAppendBatch();
     }
+
+//    分治
+    function doAppendBatch() {
+      if (batchDone < batchCount) {
+        window.requestAnimationFrame(appendItems)
+      }
+    }
+    doAppendBatch();
+
     ulContainer.addEventListener('click', function (e) {
       var ev = e || window.event;
       var target = ev.target || ev.srcElement;

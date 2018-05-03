@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>图片加载</title>
+  <style>
+    img {
+      width: 100%;
+    }
+  </style>
+</head>
+<!--判断页面中所有图片加载完成-->
+<body>
+<img id="img1" src="img/2.png">
+<img id="img2" src="img/3.png">
+
+<script>
+  window.onDOMContentLoaded = function () {
+    console.log(document.querySelector('#img2').clientWidth);
+  }
+  window.onload = function () {
+    console.log(document.querySelector('#img2').clientWidth);
+  }
+
+  var listPics = ['img/2.png', 'img/3.png'];
+  function loadImg(arr) {
+    var newImages = [];
+    var arr = (typeof arr != 'object') ? [arr] : arr;
+    for (var i = 0; i < arr.length; i++) {
+      newImages[i] = new Promise(function (resolve, reject) {
+        var image = new Image();
+        image.onload = function () {
+          resolve(image);
+          image.onload = null;
+        }
+        image.src = arr[i];
+        image.onerror = reject;
+      })
+    }
+    return newImages;
+  }
+
+  Promise.all(loadImg(listPics)).then(function () {
+    console.log('图片加载完成');
+  })
+</script>
+</body>
+</html>

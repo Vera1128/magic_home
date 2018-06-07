@@ -17,7 +17,7 @@
 </head>
 <body>
 <div id="content">
-  {{content}}
+  <%content%>
   <button @click="change">点击确定</button>
 </div>
 <script src="http://dialer.cdn.cootekservice.com/web/internal/activities/js/vue.min.js"></script>
@@ -28,6 +28,7 @@
 <script>
   var vue = new Vue({
     el: '#content',
+    delimiters: ['<%', '%>'],
     data: {
       //data
       token: '',

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>单行文字垂直跑马灯效果</title>
+	<style type="text/css">
+		ul,li{
+        list-style:none;
+        display:block;
+        margin: 0;
+        padding: 0;
+    }
+		#loop-show-box {
+			width: 300px;
+			height: 25px;
+			line-height: 25px;
+      background: red;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      overflow: hidden;
+		}
+		.li-style {
+			width: 100%;
+			height: 25px;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+<div id="loop-show-box">
+  <ul id="con1">
+    <li class="li-style">测试1号</li>
+    <li class="li-style">测试2号</li>
+    <li class="li-style">测试3号</li>
+    <li class="li-style">测试4号</li>
+  </ul>
+  <ul id="con2"></ul>
+</div>
+<script type="text/javascript">
+	var area = document.getElementById('loop-show-box');
+  var con1 = document.getElementById('con1');
+  var con2 = document.getElementById('con2');
+  var mytimer1 = null;
+  var mytimer = null;
+  var time = 1000 / 60;
+  con2.innerHTML = con1.innerHTML;
+  function scrollUp () {
+    if (area.scrollTop >= con1.offsetHeight) {
+      area.scrollTop = 0;
+    } else {
+      if (area.scrollTop % 25 == 0) {
+        clearInterval(mytimer);
+        clearInterval(mytimer1);
+        mytimer1 = setTimeout(function () {
+          mytimer = setInterval(scrollUp, time);
+        }, 1000);
+      }
+      area.scrollTop++;
+    }
+  }
+  mytimer = setInterval(scrollUp, time);
+</script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>单行文字水平跑马灯效果</title>
+  <style type="text/css">
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      width: 400px;
+      height: 25px;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      margin: 100px auto;
+    }
+    .icon {
+      width: 15px;
+      margin-right: 15px;
+    }
+    #loop-show-box {
+      width: 300px;
+      height: 25px;
+      line-height: 25px;
+      background: red;
+      overflow: auto;
+      white-space: nowrap;
+    }
+    .li-style {
+      width: 300px;
+      height: 25px;
+      text-align: left;
+      /*使用inline-block的时候两个item之间会存在间距（当然了你可以把它们写在一行以去除这样的间距*/
+      display: inline-flex;
+    }
+    #con1,#con2 {
+      display: inline-flex;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <img src="img/horn.png" class="icon">
+  <div id="loop-show-box">
+    <div id="con1">
+      <div class="li-style">测试1号</div>
+      <div class="li-style">测试2号</div>
+      <div class="li-style">测试3号</div>
+      <div class="li-style">测试4号</div>
+      <div class="li-style">测试5号</div>
+      <div class="li-style">测试6号</div>
+    </div>
+    <div id="con2"></div>
+  </div>
+</div>
+<script type="text/javascript">
+  var area = document.getElementById('loop-show-box');
+  var con1 = document.getElementById('con1');
+  var con2 = document.getElementById('con2');
+  var mytimer1 = null;
+  var mytimer = null;
+  var time = 1000 / 60;
+  con2.innerHTML = con1.innerHTML;
+  function scrollUp () {
+    if (area.scrollLeft >= con1.offsetWidth) {
+      area.scrollLeft = 0;
+    } else {
+      // 可根据想要的速度调节步长
+      area.scrollLeft += 2;
+      if (area.scrollLeft % 300 == 0) {
+        clearInterval(mytimer);
+        clearInterval(mytimer1);
+        mytimer1 = setTimeout(function () {
+          mytimer = setInterval(scrollUp, time);
+        }, 1000);
+      }
+    }
+  }
+  mytimer1 = setTimeout(function () {
+    mytimer = setInterval(scrollUp, time);
+  }, 1000)
+</script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>获取上传图片的大图和小图</title>
+</head>
+<body>
+<input type="file" accept="image/*" id="input-image" onchange="drawImage()"/>
+<img id="min-img"/>
+<img id="max-img"/>
+<img src="img/2.png" width="100" height="100">
+<script>
+//  只传入width 是为了保证图片不变形
+  function cutImage(image, width) {
+    if (image) {
+      var canvas = document.createElement('canvas');
+      canvas.width = width;
+      canvas.height = width * image.height / image.width;
+      canvas.getContext('2d').drawImage(image, 0, 0, image.width, image.height, 0, 0, canvas.width, canvas.height);
+      return canvas.toDataURL('image/jpeg', 1);
+    }
+  }
+
+  function drawImage() {
+    var reader = new FileReader();
+    var imageFiles = document.getElementById('input-image').files[0];
+    var minBase64 = '', maxBase64 = '';
+    var minImg = document.getElementById('min-img');
+    var maxImg = document.getElementById('max-img');
+    if (imageFiles) {
+      reader.onload = function () {
+        reader.onload = null;
+        var image = new Image();
+        image.onload = function () {
+          minBase64 = cutImage(image, 100);
+          maxBase64 = cutImage(image, 800);
+          minImg.src = minBase64;
+          maxImg.src = maxBase64;
+        }
+        image.src = reader.result;
+      }
+      reader.readAsDataURL(imageFiles);
+    }
+  }
+</script>
+</body>
+</html>

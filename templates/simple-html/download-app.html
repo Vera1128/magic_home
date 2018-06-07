@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, width=device-width">
+  <title></title>
+  <link rel="stylesheet" type="text/css" href=""/>
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?8203b93a73fd9e8ffc85bdaa08f566ba";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+</head>
+<body>
+<div id="content">
+  <button @click="downloadApp()">点击下载</button>
+</div>
+<script src="http://dialer.cdn.cootekservice.com/web/internal/activities/js/vue.min.js"></script>
+<script src="http://dialer.cdn.cootekservice.com/web/internal/activities/js/myLib.js?v=1"></script>
+<script src="http://dialer.cdn.cootekservice.com/web/internal/activities/js/dialer_native.js"></script>
+<script src="http://cdn.jsdelivr.net/npm/eruda"></script>
+<script>eruda.init();</script>
+<script>
+  var vue = new Vue({
+    el: '#content',
+    delimiters: ['<%', '%>'],
+    data: {
+      //data
+      token: '',
+      content: 'hhaha'
+    },
+    created: function created() {
+    },
+    mounted: function mounted() {
+      var u = navigator.userAgent;
+      var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+      var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+      console.log('是否是Android：'+isAndroid);
+      console.log('是否是iOS：'+isiOS);
+    },
+    methods: {
+      downloadApp: function downloadApp() {
+        window.location.href = 'http://dialer.cdn.cootekservice.com/android/default/apk/gray/TouchPalContacts6648.apk';
+      }
+    }
+  });
+</script>
+</body>
+</html>

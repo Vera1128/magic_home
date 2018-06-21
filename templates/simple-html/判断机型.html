@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, width=device-width">
+  <title>判断机型</title>
+</head>
+<body>
+<div id="content">
+  {{content}}
+</div>
+<script src="http://dialer.cdn.cootekservice.com/web/internal/activities/js/vue.min.js"></script>
+<script src="http://dialer.cdn.cootekservice.com/web/internal/activities/js/myLib.js?v=1"></script>
+<script src="http://dialer.cdn.cootekservice.com/web/internal/activities/js/dialer_native.js"></script>
+<script src="http://cdn.jsdelivr.net/npm/eruda"></script>
+<script>eruda.init();</script>
+<script>
+  var vue = new Vue({
+    el: '#content',
+    data: {
+      //data
+      content: ''
+    },
+    created: function created() {
+    },
+    mounted: function mounted() {
+      this.content = navigator.userAgent;
+    },
+    methods: {
+
+    }
+  });
+</script>
+</body>
+</html>

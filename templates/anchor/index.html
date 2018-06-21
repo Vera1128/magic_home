@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, width=device-width">
+  <title>直接使用a标签跳转</title>
+  <link rel="stylesheet" type="text/css" href="index.css"/>
+</head>
+<body>
+<div id="content">
+  <div class="btn-container">
+    <div class="btn" onclick="goToAnchor('anchor1')">锚点1</div>
+    <div class="btn" onclick="goToAnchor('anchor2')">锚点2</div>
+    <div class="btn" onclick="goToAnchor('anchor3')">锚点3</div>
+  </div>
+  <div class="anchor-con anchor1" id="anchor1">
+    anchor1
+  </div>
+  <div class="anchor-con anchor2" id="anchor2">
+    anchor2
+  </div>
+  <div class="anchor-con anchor3" id="anchor3">
+    anchor3
+  </div>
+</div>
+<script>
+  function goToAnchor(anchorId) {
+//    使用replace方法可以保证前一次浏览不会在浏览器中保留记录
+//    window.location.replace(window.location.href.split('#')[0] + anchorId);
+//    也可以改变content的scrollTop
+    document.getElementById('content').scrollTop = document.getElementById(anchorId).offsetTop - 100;
+  }
+</script>
+</body>
+</html>

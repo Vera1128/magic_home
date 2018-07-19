@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, width=device-width">
+  <title></title>
+  <link rel="stylesheet" type="text/css" href=""/>
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?8203b93a73fd9e8ffc85bdaa08f566ba";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+</head>
+<body>
+<div id="content">
+  <button @click="downloadApp()">点击下载</button>
+</div>
+<script src="http://dialer.cdn.cootekservice.com/web/internal/activities/js/vue.min.js"></script>
+<script src="http://dialer.cdn.cootekservice.com/web/internal/activities/js/myLib.js?v=1"></script>
+<script src="http://dialer.cdn.cootekservice.com/web/internal/activities/js/dialer_native.js"></script>
+<script src="http://cdn.jsdelivr.net/npm/eruda"></script>
+<script>eruda.init();</script>
+<script>
+  var vue = new Vue({
+    el: '#content',
+    delimiters: ['<%', '%>'],
+    data: {
+      //data
+      token: '',
+      content: 'hhaha'
+    },
+    created: function created() {
+    },
+    mounted: function mounted() {
+    },
+    methods: {
+      downloadApp: function downloadApp() {
+        // window.location.href = 'http://imtt.dd.qq.com/16891/26747DD8B125A8479AD0C9D22CA47BC9.apk?fsname=com.snda.wifilocating_4.2.91_3211.apk&csr=1bbd';
+//        var src = 'http://cootek-dialer-download.oss-cn-hangzhou.aliyuncs.com/matrix/blueLightFillter/bluelightfilter.apk';
+        var src = 'http://imtt.dd.qq.com/16891/26747DD8B125A8479AD0C9D22CA47BC9.apk?fsname=com.snda.wifilocating_4.2.91_3211.apk&csr=1bbd';
+        var iframe = document.createElement('iframe');
+        iframe.style.display = 'none';
+        iframe.src = "javascript: '<script>location.href=\"" + src + "\"<\/script>'";
+        document.getElementsByTagName('body')[0].appendChild(iframe);
+      }
+    }
+  });
+</script>
+</body>
+</html>

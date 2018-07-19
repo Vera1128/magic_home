@@ -61,13 +61,13 @@ gulp.task('babel', function () {
 
 // 压缩js文件 测试year_anchor_formal压缩后的js有用
 gulp.task('minScripts', function () {
-  gulp.src('./es6/year_anchor_formal/js/*.js')
+  gulp.src('./es6/turntable/js/*.js')
     .pipe(plugins.babel({
       presets: ['es2015']
     }))
     .pipe(plugins.rename({suffix: '.min'}))
     .pipe(plugins.uglify())
-    .pipe(gulp.dest('./templates/year_anchor_formal/js/'))
+    .pipe(gulp.dest('./templates/turntable/js/'))
 });
 gulp.task('concatScripts', function () {
   gulp.src(['./templates/dialer/internal/activities/city2/js/*.js', '!./templates/dialer/internal/activities/city2/js/city2.js', '!./templates/dialer/internal/activities/city2/js/common.min.js'])
@@ -78,10 +78,10 @@ gulp.task('concatScripts', function () {
 });
 // 压缩css  测试了一下year_anchor_formal压缩后的css可用
 gulp.task('minifyCss', () => {
-  gulp.src('./templates/year_anchor_formal/css/index.css')
+  gulp.src('./templates/turntable/css/index.css')
     .pipe(plugins.cleanCss({compatibility: 'ie8'}))
     .pipe(plugins.rename({suffix: '.min'}))
-    .pipe(gulp.dest('./templates/year_anchor_formal/css/'))
+    .pipe(gulp.dest('./templates/turntable/css/'))
 });
 
 //压缩图片

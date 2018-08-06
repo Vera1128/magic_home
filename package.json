@@ -34,13 +34,17 @@
     "gulp-less": "^3.1.0",
     "gulp-load-plugins": "^1.2.4",
     "gulp-plumber": "^1.1.0",
+    "gulp-px2rem": "^1.0.13",
+    "gulp-px2rem-plugin": "^0.4.0",
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^2.3.2",
+    "gulp-stylus": "^2.7.0",
     "gulp-uglify": "^1.5.4",
     "gulp-watch": "^4.3.8",
     "http-proxy-middleware": "^0.18.0",
     "jshint": "^2.9.5",
-    "socket.io": "^2.0.4"
+    "socket.io": "^2.0.4",
+    "stylus-px2rem": "^1.0.14"
   },
   "dependencies": {
     "mysql": "^2.15.0",

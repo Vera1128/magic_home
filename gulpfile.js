@@ -5,7 +5,7 @@ var gulp = require('gulp');
 var plugins = require('gulp-load-plugins')();//加载其他插件
 require('gulp-connect');
 var proxy = require('http-proxy-middleware');
-
+var px2rem = require('gulp-px2rem-plugin');
 //配置
 jshint_config = {
   eqeqeq: false,
@@ -40,11 +40,12 @@ gulp.task('lint', function () {
 
 // 编译Sass
 gulp.task('sass', function () {
-  gulp.src('./styles/**/*.scss')
+  gulp.src('./styles/test/css/test.scss')
     .pipe(plugins.plumber())
     .pipe(plugins.sass())
     .pipe(plugins.autoprefixer(autoprefixer_config))
-    .pipe(gulp.dest('./templates/'))
+    .pipe(px2rem({'width_design':360, 'pieces': 18, 'ignore_px':[1,2], 'valid_num': 3}))
+    .pipe(gulp.dest('./templates/test/css/'))
     .pipe(plugins.connect.reload());
 });
 

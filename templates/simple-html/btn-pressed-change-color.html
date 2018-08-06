@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, width=device-width">
+  <title>设置按钮点击色</title>
+  <style>
+    .common-btn {
+      width: 100px;
+      height: 50px;
+      line-height: 50px;
+      text-align: center;
+      border: 1px solid grey;
+      border-radius: 10px;
+    }
+    .normal {
+      background: #3a8ee6;
+    }
+    .pressed {
+      background: #1d78cb;
+    }
+  </style>
+</head>
+<body>
+<div id="content">
+   <button class="common-btn normal">按钮点击色</button>
+</div>
+ <script src="http://dialer.cdn.cootekservice.com/web/internal/activities/js/myLib.js?v=1"></script>
+<script src="http://dialer.cdn.cootekservice.com/web/internal/activities/js/dialer_native.js"></script>
+<script src="http://cdn.jsdelivr.net/npm/eruda"></script>
+<script>eruda.init();</script>
+<script>
+  var btn = document.querySelector('.normal');
+  btn.addEventListener('touchstart', function () {
+    this.classList.toggle('pressed');
+  })
+  btn.addEventListener('touchend', function () {
+    this.classList.remove('pressed');
+  })
+</script>
+</body>
+</html>

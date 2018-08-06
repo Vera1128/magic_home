@@ -1,0 +1,36 @@
+<!--
+问题：移动端点击事件会出现约300ms的延迟
+原因：源于ios上会有双击缩放的功能 当点击页面元素的时候，系统捕捉到第一次单击后，会先等待一段时间，如果在这段时间区间里用户未进行下一次点击，则浏览器会做单击事件处理，如果这段时间里用户进行了第二次单击，则浏览器会做双击事件处理。
+解决：
+1. 禁止缩放(可解决大部分延迟问题) <meta name="viewport" content="width=device-width, user-scalable= 'no'">
+2. 使用fastclick.js
+注意： ios11已经解决了延迟的问题，可不引入
+check了一下，ios 10 11上延迟已经没有300ms那么长了，基本上控制在100ms以下，用户几乎无感知，当然了，使用fastclick之后，延迟是会缩小到10ms以下，但是click会在touchend之前执行。
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>click事件延迟</title>
+</head>
+<body>
+
+<button id="test-btn"> 点击 </button>
+<script src="http://cdn.jsdelivr.net/npm/eruda"></script>
+<script>eruda.init();</script>
+<script src="js/fastclick.js"></script>
+<script>
+  if ('addEventListener' in document) {
+    document.addEventListener('DOMContentLoaded', function() {
+      // 哪里需要去除延迟 就attach到哪个元素上 这里attach到body上了
+      FastClick.attach(document.body);
+    }, false);
+  }
+  window.onload = function () {
+    document.getElementById('test-btn').addEventListener('click', function () {
+      console.log('hhha');
+    }, false);
+  }
+</script>
+</body>
+</html>

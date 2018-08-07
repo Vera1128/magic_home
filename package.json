@@ -47,6 +47,10 @@
     "stylus-px2rem": "^1.0.14"
   },
   "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
+    "fs": "0.0.1-security",
+    "https": "^1.0.0",
+    "iconv-lite": "^0.4.23",
     "mysql": "^2.15.0",
     "node-sass": "^4.7.2"
   }

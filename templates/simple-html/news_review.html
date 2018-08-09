@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>新闻审核</title>
+  <link rel="shortcut icon" type="image/x-icon" href="http://data-news.cdn.cootekservice.com/news/img/favicon.ico"/>
+  <link rel="stylesheet" href="https://unpkg.com/element-ui@2.2.1/lib/theme-chalk/index.css">
+  <link rel="stylesheet" type="text/css" href="../static/bootstrap/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="../static/news_review.css"/>
+</head>
+<body>
+<div id="content">
+  <div class="search-container">
+    <label>查询类型:</label>
+    <el-select v-model="searchType" placeholder="请选择" @change="changeHandler" style="width: 300px">
+      <el-option
+              v-for="item in options"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value">
+      </el-option>
+    </el-select>
+    <template v-if="searchType == 0">
+      <br>
+      <br>
+      <label>开始时间:</label>
+      <el-date-picker
+            v-model="startTime"
+            type="datetime"
+            placeholder="选择开始时间"
+            @change="dateTimeChange"
+            style="width: 300px"
+      >
+      </el-date-picker>
+      <br>
+      <br>
+      <label>结束时间:</label>
+      <el-date-picker
+              v-model="endTime"
+              type="datetime"
+              placeholder="选择结束时间"
+              @change="dateTimeChange"
+              style="width: 300px"
+      >
+      </el-date-picker>
+    </template>
+
+    <template v-if="searchType == 1">
+      <br>
+      <br>
+      <label>输入标题:</label>
+      <el-input v-model="searchTitle" placeholder="请输入内容" style="width: 300px"></el-input>
+    </template>
+    <br>
+    <el-button type="primary" style="margin: 10px 20px 10px 150px" @click="searchHandler">搜索</el-button>
+  </div>
+  <template v-if="newsList.length > 0">
+    <el-button type="primary" style="margin-bottom: 10px">搜索结果：</el-button>
+    <el-table
+            :data="newsList"
+            border
+            style="width: 100%">
+      <el-table-column
+              label="新闻标题">
+        <template slot-scope="scope">
+          <a :href="scope.row.url"><%scope.row.title%></a>
+        </template>
+      </el-table-column>
+      <el-table-column
+              prop="ctid"
+              label="ctid"
+              width="200">
+      </el-table-column>
+      <el-table-column
+              label="状态"
+              width="120">
+        <template slot-scope="scope">
+          <%parseInt(scope.row.check_status) === 0 ? '未审核' : parseInt(scope.row.check_status) === 1 ? '审核通过' : '审核未通过'%>
+        </template>
+      </el-table-column>
+      <el-table-column
+              label="操作"
+              width="200">
+        <template slot-scope="scope">
+          <el-radio-group v-model="scope.row.check_status" @change="changeReviewStatus(scope.row.check_status, scope.row.ctid)">
+            <el-radio label="1" key="1">通过</el-radio>
+            <el-radio label="2" key="2">不通过</el-radio>
+          </el-radio-group>
+        </template>
+      </el-table-column>
+      <el-table-column
+              prop="check_user"
+              label="操作者"
+              width="150">
+      </el-table-column>
+    </el-table>
+    <!--<table class="table table-bordered">-->
+      <!--<thead>-->
+      <!--<tr>-->
+        <!--<th>编号</th>-->
+        <!--<th>标题</th>-->
+        <!--<th>ctid</th>-->
+        <!--<th width="100px">状态</th>-->
+        <!--<th>操作</th>-->
+        <!--<th>操作者</th>-->
+      <!--</tr>-->
+      <!--</thead>-->
+      <!--<tbody>-->
+      <!--<tr v-for="(item, index) in newsList">-->
+        <!--<td><%index + 1%></td>-->
+        <!--<td><a :href="item.url"><%item.title%></a></td>-->
+        <!--<td><%item.ctid%></td>-->
+        <!--<td width="100px"><%parseInt(item.check_status) === 0 ? '未审核' : parseInt(item.check_status) === 1 ? '审核通过' : '审核未通过'%></td>-->
+        <!--<td>-->
+          <!--<el-radio-group v-model="item.check_status" @change="changeReviewStatus(value, ctid)">-->
+            <!--<el-radio label="1" key="1">通过</el-radio>-->
+            <!--<el-radio label="2" key="2">不通过</el-radio>-->
+          <!--</el-radio-group>-->
+        <!--</td>-->
+        <!--<td><%item.check_user || '无'%></td>-->
+      <!--</tr>-->
+      <!--</tbody>-->
+    <!--</table>-->
+    <div class="btns-group">
+      <el-button type="primary">&lt;上一页</el-button>
+      <el-button type="primary" class="next-page-btn">下一页&gt;</el-button>
+    </div>
+  </template>
+</div>
+<script src="http://cootek-dialer-download.oss-cn-hangzhou.aliyuncs.com/web/internal/activities/js/vue2.5.min.js"></script>
+<script src="http://cootek-dialer-download.oss-cn-hangzhou.aliyuncs.com/web/internal/activities/js/echarts.common.min.js"></script>
+<script src="https://unpkg.com/element-ui@2.2.1/lib/index.js"></script>
+<script src="http://cootek-dialer-download.oss-cn-hangzhou.aliyuncs.com/web/internal/activities/js/axios.min.js"></script>
+<script>
+  const DEBUG = true;
+  const dialerAxios = axios.create({
+    baseURL: DEBUG ? 'http://localhost:8870/' : '/',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    }
+  })
+  var vue = new Vue({
+    el: '#content',
+    delimiters: ['<%', '%>'],
+    data: {
+      options: [{
+        value: '0',
+        label: '根据时间查询'
+      }, {
+        value: '1',
+        label: '根据新闻标题查询'
+      }],
+      searchType: '0',
+      searchTitle: '',
+      startTime: '',
+      endTime: '',
+      pageNum: 1,
+      reviewStatus: '',
+      newsList: [
+        {
+          'account': '210-293211336',
+          'title': '重磅，炒房的都哭了！赣州没买房的人快看，住建部要问责了！',
+          'url': 'http://data-news.cdn.cootekservice.com/news/2018-08-08/210-293211336.html',
+          'check_status': 0,
+          'ctid': '8696491638944423535',
+          'check_user': ''
+        },
+        {
+          'account': '210-293295723',
+          'title': '家长们请进 赣州一批新增学校工程进度大比拼',
+          'url': 'http://data-news.cdn.cootekservice.com/news/2018-08-09/210-293295723.html',
+          'check_status': 0,
+          'ctid': '15872449358555436312',
+          'check_user': ''
+        },
+        {
+          'account': '210-293193870',
+          'title': '人贩子：没有我拐不走的孩子！50个孩子，42个孩子被成功拐走！',
+          'url': 'http://data-news.cdn.cootekservice.com/news/2018-08-08/210-293193870.html',
+          'check_status': 0,
+          'ctid': '5045636415430716773',
+          'check_user': ''
+        },
+        {
+          'account': '210-293296393',
+          'title': '效果图来了！赣州佳和锦城建设项目规划批前公示',
+          'url': 'http://data-news.cdn.cootekservice.com/news/2018-08-09/210-293296393.html',
+          'check_status': 0,
+          'ctid': '13550555022496177986',
+          'check_user': ''
+        },
+        {
+          'account': '210-293185269',
+          'title': '全南警方打掉多个团伙！新一轮攻势正在进行',
+          'url': 'http://data-news.cdn.cootekservice.com/news/2018-08-08/210-293185269.html',
+          'check_status': 0,
+          'ctid': '592329362586603989',
+          'check_user': ''
+        },
+        {
+          'account': '210-293282170',
+          'title': '信丰首例：饮酒驾驶不吸取教训，再次酒驾被行政拘留！',
+          'url': 'http://data-news.cdn.cootekservice.com/news/2018-08-09/210-293282170.html',
+          'check_status': 0,
+          'ctid': '15781731207007821183',
+          'check_user': ''
+        },
+        {
+          'account': '210-293185879',
+          'title': '章江新区一棚户改造安置房-赣源小区效果图曝光',
+          'url': 'http://data-news.cdn.cootekservice.com/news/2018-08-08/210-293185879.html',
+          'check_status': 0,
+          'ctid': '11051168957889178993',
+          'check_user': ''
+        },
+        {
+          'account': '210-293393031',
+          'title': '嫁过5个男人，丧夫留下10亿却养男宠，被家暴毁容自杀不成后出家',
+          'url': 'http://data-news.cdn.cootekservice.com/news/2018-08-09/210-293393031.html',
+          'check_status': 0,
+          'ctid': '10660943681547562779',
+          'check_user': ''
+        }
+      ]
+    },
+    created: function created () {
+    },
+    mounted: function mounted () {
+      var date = new Date();
+      var start = date.getFullYear() + '-' + this.addZero(date.getMonth() + 1) + '-' + this.addZero(date.getDate()) + ' 00:00:00';
+      var end = date.getFullYear() + '-' + this.addZero(date.getMonth() + 1) + '-' + this.addZero(date.getDate()) + ' 23:59:59';
+      this.startTime = new Date(start);
+      this.endTime = new Date(end);
+    },
+    methods: {
+      dateTimeChange: function (value) {
+        console.log(this.fmtDate(Date.parse(value)));
+      },
+      changeHandler: function (value) {
+//        value 改变的时候数组置空
+//        this.newsList = [];
+//        this.pageNum = 0;
+      },
+      searchHandler: function () {
+        if (this.searchType == '0') {
+          var startTime = this.fmtDate(Date.parse(this.startTime));
+          var endTime = this.fmtDate(Date.parse(this.endTime));
+          var URL = `news_check_info/get?begin_time=${startTime}&end_time=${endTime}&page_num=${this.pageNum}`;
+          dialerAxios.get(URL).then(function(res){
+
+          }).catch(function (e) {
+            console.log('错误' + e);
+          })
+        } else {
+          if (this.searchTitle) {
+            var URL = `news_check_info/get?title=${this.searchTitle}&page_num=${this.pageNum}`;
+            dialerAxios.get(URL).then(function(res){
+
+            }).catch(function (e) {
+              console.log('错误' + e);
+            })
+          } else return;
+        }
+      },
+      changeReviewStatus: function (value, ctid) {
+        console.log(value, ctid);
+      },
+      // 格式化时间
+      fmtDate: function (obj) {
+        var date =  new Date(obj);
+        var str = date.getFullYear() + '-' + this.addZero(date.getMonth() + 1) + '-' + this.addZero(date.getDate()) + ' ' + this.addZero(date.getHours()) + ':' + this.addZero(date.getMinutes()) + ':' + this.addZero(date.getSeconds());
+        return str;
+      },
+      addZero (str) {
+        str = '' + str;
+        if (str.length < 2) return '0' + str;
+        else return str;
+      }
+    }
+  });
+</script>
+</body>
+</html>

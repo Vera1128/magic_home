@@ -1,0 +1,189 @@
+<!--
+callback 存在回调地狱 代码横向延伸 不优雅 在"并发请求 同时拿到结果"的问题上不好解决
+Promise 可以很好地解决回调地狱及并发请求 代码纵向延伸 符合编码规范 但是兼容性不好
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>体验 Promise 的链式写法</title>
+  <style>
+    .ball {
+      width: 40px;
+      height: 40px;
+      border-radius: 20px;
+    }
+
+    .ball1, .ball4 {
+      background: red;
+    }
+
+    .ball2, .ball5 {
+      background: green;
+    }
+
+    .ball3, .ball6 {
+      background: yellow;
+    }
+  </style>
+</head>
+<body>
+<h1>采用回调函数的方式来实现</h1>
+
+<div class="ball ball1" style="margin-left: 0px;"></div>
+<div class="ball ball2" style="margin-left: 0px;"></div>
+<div class="ball ball3" style="margin-left: 0px;"></div>
+<hr>
+<h1>采用 Promise 的方式来实现</h1>
+
+<div class="ball ball4" style="margin-left: 0px;"></div>
+<div class="ball ball5" style="margin-left: 0px;"></div>
+<div class="ball ball6" style="margin-left: 0px;"></div>
+
+<script>
+  var ball1 = document.querySelector('.ball1');
+  var ball2 = document.querySelector('.ball2');
+  var ball3 = document.querySelector('.ball3');
+  var ball4 = document.querySelector('.ball4');
+  var ball5 = document.querySelector('.ball5');
+  var ball6 = document.querySelector('.ball6');
+
+//    /**
+//     * 方法一：采用 setTimeout 实现
+//     * @param ball
+//     * @param distance
+//     * @param callback
+//     */
+//    function animate(ball, distance, callback) {
+//        setTimeout(function () {
+//            var marginLeft = parseInt(ball.style.marginLeft);
+//            if (marginLeft == distance) {
+//                callback && callback();
+//                return; // 注意在这里一定要返回定时器对象，确保后面拿到的是一个新的定时器对象
+//            } else {
+//                if (marginLeft < distance) {
+//                    marginLeft++;
+//                } else {
+//                    marginLeft--;
+//                }
+//            }
+//            ball.style.marginLeft = marginLeft + 'px';
+//            animate(ball, distance, callback);
+//        }, 10);
+//    }
+
+//  /**
+//   * 方法二：采用 setInterval 实现
+//   * @param ball
+//   * @param distance
+//   * @param callback
+//   */
+//  function animate(ball, distance, callback) {
+//    var interval = setInterval(function () {
+//      var marginLeft = parseInt(ball.style.marginLeft);
+//      if (marginLeft == distance) {
+//        callback && callback();
+//        clearInterval(interval);
+//      } else {
+//        if (marginLeft < distance) {
+//          marginLeft++;
+//        } else {
+//          marginLeft--;
+//        }
+//      }
+//      ball.style.marginLeft = marginLeft + 'px';
+//    }, 10);
+//  }
+//
+//  animate(ball1, 100, function () {
+//    animate(ball2, 200, function () {
+//      animate(ball3, 300, function () {
+//        animate(ball3, 150, function () {
+//          animate(ball2, 150, function () {
+//            animate(ball1, 150, function () {
+//              //
+//            });
+//          });
+//        });
+//      });
+//    });
+//  });
+
+      /**
+       * 采用 Promise 实现
+       * @param ball
+       * @param distance
+       * @returns {Promise}
+       */
+      function promiseAnimate(ball, distance) {
+          return new Promise(function (resolve, reject) {
+              var interval = setInterval(function () {
+                  var marginLeft = parseInt(ball.style.marginLeft);
+                  if (marginLeft == distance) {
+                      resolve();
+                      clearInterval(interval);
+                  } else {
+                      if (marginLeft < distance) {
+                          marginLeft++;
+                      } else {
+                          marginLeft--;
+                      }
+                  }
+                  ball.style.marginLeft = marginLeft + 'px';
+              }, 10);
+          });
+      }
+
+      promiseAnimate(ball4, 100)
+              .then(function () {
+                  return promiseAnimate(ball5, 200);
+              })
+              .then(function () {
+                  return promiseAnimate(ball6, 300);
+              })
+              .then(function () {
+                  return promiseAnimate(ball6, 150);
+              })
+              .then(function () {
+                  return promiseAnimate(ball5, 150);
+              })
+              .then(function () {
+                  return promiseAnimate(ball4, 150);
+              });
+
+  /**
+   * 采用 Promise 实现
+   * @param ball
+   * @param distance
+   * @returns {Function}
+   */
+//  function promiseAnimate(ball, distance) {
+//    return function () {
+//      return new Promise(function (resolve, reject) {
+//        var interval = setInterval(function () {
+//          var marginLeft = parseInt(ball.style.marginLeft);
+//          if (marginLeft == distance) {
+//            resolve();
+//            clearInterval(interval);
+//          } else {
+//            if (marginLeft < distance) {
+//              marginLeft++;
+//            } else {
+//              marginLeft--;
+//            }
+//          }
+//          ball.style.marginLeft = marginLeft + 'px';
+//        }, 10);
+//      });
+//    }
+//  }
+//
+//  promiseAnimate(ball4, 100)()
+//    .then(promiseAnimate(ball5, 200))
+//    .then(promiseAnimate(ball6, 300))
+//    .then(promiseAnimate(ball6, 150))
+//    .then(promiseAnimate(ball5, 150))
+//    .then(promiseAnimate(ball4, 150))
+</script>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, width=device-width">
+  <title>js防抖与节流</title>
+</head>
+<body>
+<div>
+  <label>没有防抖的input</label>
+  <input id="unDebounce">
+</div>
+<div>
+  <label>防抖的input</label>
+  <input id="debounce">
+</div>
+<div>
+  <label>节流的input</label>
+  <input id="throttle">
+</div>
+<script>
+  function ajax(content) {
+    console.log('ajax request' + content);
+  }
+
+  // 函数防抖（指定时间内没有输入 才会执行函数 否则会触发重新计时 ）
+  function debounce(func, delay) {
+    return function (args) {
+      let _args = args;
+      clearTimeout(func.id);
+      func.id = setTimeout(function () {
+        func(_args);
+      }, delay);
+    }
+  }
+  // 没有防抖
+  let inputa = document.getElementById('unDebounce');
+  inputa.addEventListener('keyup', function (e) {
+    ajax(e.target.value);
+  })
+  
+  // 防抖
+  let inputb = document.getElementById('debounce');
+  let debounceAjax = debounce(ajax, 500);
+  inputb.addEventListener('keyup', function (e) {
+    debounceAjax(e.target.value);
+  })
+
+  // 函数节流（规定在一个单位时间内，只能触发一次函数。如果这个单位时间内触发多次函数，只有一次生效）
+  function throttle(func, delay) {
+    let last, deferTimer;
+    return function (args) {
+      let now = +new Date();
+      if (last && now < last + delay) {
+        clearTimeout(deferTimer);
+        deferTimer = setTimeout(function () {
+          last = now;
+          func(args);
+        }, delay);
+      } else {
+        last = now;
+        func(args);
+      }
+    }
+  }
+
+  // 节流
+  let throttleAjax = throttle(ajax, 1000);
+  let inputc = document.getElementById('throttle');
+  inputc.addEventListener('keyup', function (e) {
+    throttleAjax(e.target.value);
+  })
+
+  /*
+  结合应用场景
+
+  debounce：
+
+  search搜索联想，用户在不断输入值时，用防抖来节约请求资源。
+  window触发resize的时候，不断的调整浏览器窗口大小会不断的触发这个事件，用防抖来让其只触发一次
+
+
+  throttle：
+
+  鼠标不断点击触发，mousedown(单位时间内只触发一次)
+  监听滚动事件，比如是否滑到底部自动加载更多，用throttle来判断
+  */
+
+</script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <title></title>
+</head>
+<body>
+<div id="content">
+  <button @click="clickHandle">确定</button>
+</div>
+<script src="http://dialer.cdn.cootekservice.com/web/internal/activities/js/vue.min.js"></script>
+<script src="http://cdn.jsdelivr.net/npm/eruda"></script>
+<script>eruda.init();</script>
+<script>
+//var localIds = [0, 1, 2, 3];
+//var serverIds = [];
+//function uploadImage (localIds) {
+//  return new Promise (function (resolve, reject) {
+//    if (localIds.length == 0) {
+//      return resolve({isFinished: true, data: serverIds});
+//    } else {
+//      var localId = localIds[0];
+//      serverIds.push(localId);
+//      localIds.shift();
+//      return resolve({isFinished: false});
+//    }
+//  }).then(({isFinished, data}) => {
+//    return isFinished ? Promise.resolve(data) : uploadImage(localIds);
+//  })
+//}
+//uploadImage(localIds).then((data) => {
+//  console.log(data);
+//}, () => {
+//  console.log('出错了');
+//})
+var localIds = [0, 11, 22, 33];
+var serverIds = [];
+var array = [];
+function uploadImage (localId) {
+  return new Promise (function (resolve, reject) {
+    // 做一系列动作
+
+    // 递归
+    resolve(localId);
+  })
+}
+for (let i = 0; i < localIds.length; i++) {
+  array.push(uploadImage(localIds[i]));
+}
+Promise.all(array).then(function (res) {
+  serverIds = res.slice(0);
+  console.log('res', serverIds);
+})
+
+</script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!--好用是好用 但是兼容性不好 ios系统还没开始支持-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <title>使用IntersectionObserver实现图片懒加载</title>
+  <style>
+    body, html, #content{
+      width: 100%;
+      height: 100%;
+    }
+    .container {
+      width: 200px;
+      height: 200px;
+      border: 1px solid red;
+      overflow: auto;
+    }
+    .example {
+      width: 50px;
+      height: 50px;
+      margin-top: 100px;
+      margin-bottom: 300px;
+      background: grey;
+    }
+  </style>
+  <script>
+    function adaptation () {
+      var clientWidth = window.screen.width;
+      var dpr = window.devicePixelRatio;
+      var vp = document.createElement('meta');
+      document.documentElement.style.fontSize = clientWidth > 414 ? '20px' : 20 * dpr * clientWidth / 360 + 'px';
+      vp.name = 'viewport';
+      vp.content = `initial-scale=${1.0 * 1 / dpr}, maximum-scale=${1.0 * 1 / dpr}, minimum-scale=${1.0 * 1 / dpr}, user-scalable=no, width=device-width`;
+      var m = document.getElementsByTagName('meta')[0];
+      m.parentNode.insertBefore(vp, m);
+    }
+    adaptation();
+  </script>
+</head>
+<body>
+<div id="content">
+  <div class="container">
+    <div class="example" id="example"></div>
+  </div>
+</div>
+<script src="http://cdn.jsdelivr.net/npm/eruda"></script>
+<script>eruda.init();</script>
+<script>
+  var io = new IntersectionObserver(entries => {
+    console.log(entries);
+  }, {
+    root: document.querySelector('.container')
+  });
+  io.observe(document.getElementById('example'));
+</script>
+</body>
+</html>

@@ -37,6 +37,7 @@ html{
 }
 div{
   box-sizing: border-box;
+  // position设置为relative时 elementUI中的日期时间选择器会出现使用上的bug
   position: relative;
 }
 img{

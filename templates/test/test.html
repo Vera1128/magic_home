@@ -2,9 +2,7 @@
 <html lang="en">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-  <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, width=device-width">
   <title></title>
-  <link rel="stylesheet" type="text/css" href="css/test.css"/>
   <script>
     var _hmt = _hmt || [];
     (function() {
@@ -26,15 +24,42 @@
     }
     adaptation();
   </script>
+  <style>
+    i {
+      font-family: '微软雅黑';
+      font-weight: bold;
+      font-size: 1rem;
+    }
+  </style>
 </head>
 <body>
 <div id="content">
-  <div class="test">测试</div>
+  <img src="img/head-img.png">
+  <div style="margin-top: -5rem">
+    <i>哈哈哈哈哈我是头图文案</i>
+  </div>
 </div>
-<script src="http://dialer.cdn.cootekservice.com/web/internal/activities/js/vue.min.js"></script>
-<script src="http://dialer.cdn.cootekservice.com/web/internal/activities/js/myLib.js?v=1"></script>
-<script src="http://dialer.cdn.cootekservice.com/web/internal/activities/js/dialer_native.js"></script>
+<script src="http://yangyangchange/web/internal/activities/js/vue.min.js"></script>
+<script src="http://yangyangchange/web/internal/activities/js/myLib.js?v=1"></script>
+<script src="http://yangyangchange/web/internal/activities/js/dialer_native.js"></script>
 <script src="http://cdn.jsdelivr.net/npm/eruda"></script>
 <script>eruda.init();</script>
+<script>
+  var vue = new Vue({
+    el: '#content',
+    delimiters: ['<%', '%>'],
+    data: {
+      //data
+      token: '',
+      content: 'hhaha'
+    },
+    created: function created() {
+    },
+    mounted: function mounted() {
+    },
+    methods: {
+    }
+  });
+</script>
 </body>
 </html>

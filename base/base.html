@@ -37,9 +37,9 @@
   <%content%>
   <button @click="change">点击确定</button>
 </div>
-<script src="http://dialer.cdn.cootekservice.com/web/internal/activities/js/vue.min.js"></script>
-<script src="http://dialer.cdn.cootekservice.com/web/internal/activities/js/myLib.js?v=1"></script>
-<script src="http://dialer.cdn.cootekservice.com/web/internal/activities/js/dialer_native.js"></script>
+<script src="http://yangyangchange/web/internal/activities/js/vue.min.js"></script>
+<script src="http://yangyangchange/web/internal/activities/js/myLib.js?v=1"></script>
+<script src="http://yangyangchange/web/internal/activities/js/dialer_native.js"></script>
 <script src="http://cdn.jsdelivr.net/npm/eruda"></script>
 <script>eruda.init();</script>
 <script>
@@ -58,7 +58,7 @@
       myLib.ajax({
         type: 'get',
         dataType: 'json',
-        url: 'http://touchlife.cootekservice.com/yellowpage_v3/voice_chat_room/get_room_info?_token=' + myLib.GetQueryString('_token') + '&timestamp=' + Date.parse(new Date()) / 1000 + '&group_id=' + myLib.GetQueryString('group_id'),
+        url: '' + myLib.GetQueryString('_token') + '&timestamp=' + Date.parse(new Date()) / 1000 + '&group_id=' + myLib.GetQueryString('group_id'),
         success: function success(res) {
           self.content = res.result.content.replace(/\n/g, '<br>');
           console.log(self.content);

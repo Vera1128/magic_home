@@ -1,22 +1,22 @@
 @font-face {
   font-family: PingFangSC-Regular;
-  src: url("http://cootek-dialer-download.oss-cn-hangzhou.aliyuncs.com/web/fonts/PingFangSC-Regular.ttf"); }
+  src: url("http://yangyangchange/web/fonts/PingFangSC-Regular.ttf"); }
 
 @font-face {
   font-family: dialer_icon1;
-  src: url("http://cootek-dialer-download.oss-cn-hangzhou.aliyuncs.com/web/fonts/dialer_icon1.ttf"); }
+  src: url("http://yangyangchange/web/fonts/dialer_icon1.ttf"); }
 
 @font-face {
   font-family: dialer_icon2;
-  src: url("http://cootek-dialer-download.oss-cn-hangzhou.aliyuncs.com/web/fonts/dialer_icon2.ttf"); }
+  src: url("http://yangyangchange/web/fonts/dialer_icon2.ttf"); }
 
 @font-face {
   font-family: dialer_icon3;
-  src: url("http://cootek-dialer-download.oss-cn-hangzhou.aliyuncs.com/web/fonts/dialer_icon3.ttf"); }
+  src: url("http://yangyangchange/web/fonts/dialer_icon3.ttf"); }
 
 @font-face {
   font-family: dialer_icon4;
-  src: url("http://cootek-dialer-download.oss-cn-hangzhou.aliyuncs.com/web/fonts/dialer_icon4.ttf"); }
+  src: url("http://yangyangchange/web/fonts/dialer_icon4.ttf"); }
 
 html {
   -webkit-user-select: none;

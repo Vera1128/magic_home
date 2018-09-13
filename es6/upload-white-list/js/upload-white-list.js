@@ -1,7 +1,6 @@
 /**
  * Created by yangyang.xu on 2018/4/24.
  */
-// const URI = 'https://dialer-manager.cootekservice.com';
 const URI = 'http://121.52.235.231:41211';
 var vue = new Vue({
   el: '#content',
